@@ -1,0 +1,13 @@
+{
+  "appId": "com.leszeros.captor",
+  "appName": "captor",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": ".next/server/pages",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

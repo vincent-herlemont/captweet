@@ -1,0 +1,18 @@
+{
+  "name": "captor",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@capacitor/android": "^2.4.0",
+    "@capacitor/cli": "^2.4.0",
+    "@capacitor/core": "^2.4.0",
+    "next": "9.5.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  }
+}
