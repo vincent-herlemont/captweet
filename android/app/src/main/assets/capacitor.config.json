@@ -3,7 +3,7 @@
   "appName": "captor",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": ".next/server/pages",
+  "webDir": "out",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0

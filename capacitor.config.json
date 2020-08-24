@@ -3,12 +3,11 @@
   "appName": "captor",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": ".next/server/pages",
+  "webDir": "out",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
     }
   },
-  "linuxAndroidStudioPath": "/home/vincent/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/193.6626763/bin/studio.sh",
   "cordova": {}
 }

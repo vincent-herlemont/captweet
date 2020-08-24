@@ -1,0 +1,6 @@
+---
+setups:
+  android:
+    file: run.sh
+    array_vars:
+      all: ".*"
