@@ -115,6 +115,10 @@
   height: 1em;
 }
 
+.dynamic_test {
+  color: green;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
