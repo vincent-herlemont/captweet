@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">captor</string>
-    <string name="title_activity_main">captor</string>
+    <string name="app_name">Captweet</string>
+    <string name="title_activity_main">Captweet</string>
     <string name="package_name">com.leszeros.captor</string>
     <string name="custom_url_scheme">com.leszeros.captor</string>
 </resources>

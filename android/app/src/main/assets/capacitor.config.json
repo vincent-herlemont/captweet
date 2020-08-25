@@ -1,6 +1,6 @@
 {
   "appId": "com.leszeros.captor",
-  "appName": "captor",
+  "appName": "Captweet",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "out",
