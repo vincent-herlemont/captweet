@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start",
-    "resources": "capacitor-resources -S -p android"
+    "resources": "capacitor-resources -S -p android",
+    "format-check": "prettier --check .",
+    "format-write": "prettier --write ."
   },
   "dependencies": {
     "@capacitor/android": "^2.4.0",
@@ -20,6 +22,7 @@
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.11.1"
+    "babel-plugin-styled-components": "^1.11.1",
+    "prettier": "2.1.1"
   }
 }

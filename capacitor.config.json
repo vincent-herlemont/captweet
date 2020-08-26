@@ -9,8 +9,8 @@
       "launchShowDuration": 0
     }
   },
-  "android" : {
-    "webContentsDebuggingEnabled" : true
+  "android": {
+    "webContentsDebuggingEnabled": true
   },
   "cordova": {}
 }
