@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import theme from "../styles/theme";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { SearchCtxProvider } from "../utils/SearchCtx";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,8 +23,10 @@ const GlobalStyle = createGlobalStyle`
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
-      <GlobalStyle />
+      <SearchCtxProvider>
+        <Component {...pageProps} />
+        <GlobalStyle />
+      </SearchCtxProvider>
     </ThemeProvider>
   );
 }
