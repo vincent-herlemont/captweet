@@ -9,7 +9,6 @@ const GlobalStyle = createGlobalStyle`
   props.theme.color.twitter_blue} 94.79%), #FFFFFF;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 100%;
   }
   
   @font-face {
@@ -18,7 +17,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 700;
     src: url(/fonts/static/RobotoSlab-Bold.ttf) format('woff2');
   }
-
 `;
 
 function MyApp({ Component, pageProps }) {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 const Svg = ({ className }) => {
   return (
@@ -56,18 +57,12 @@ const Svg = ({ className }) => {
   );
 };
 
-const Logo = () => {
-  const [size, setSize] = useState(33);
+const Logo = ({ className }) => {
   return (
-    <div
-      style={{ width: size, height: size }}
-      onClick={() => {
-        setSize((size) => size + 2);
-      }}
-    >
+    <div className={className}>
       <Svg />
     </div>
   );
 };
 
-export default Logo;
+export default styled(Logo)``;

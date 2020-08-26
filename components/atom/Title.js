@@ -2,11 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Title = ({ className }) => {
-  return (
-    <div className={className}>
-      <h1>captweet</h1>
-    </div>
-  );
+  return <h1 className={className}>captweet</h1>;
 };
 
 export default styled(Title)`
@@ -14,6 +10,7 @@ export default styled(Title)`
   font-family: Roboto Slab;
   font-style: normal;
   font-weight: 900;
-  font-size: 28px;
-  line-height: 37px;
+  font-size: 1.75em;
+  margin: 0;
+  padding: 0;
 `;

@@ -1,23 +1,41 @@
 import Head from "next/head";
 import styled from "styled-components";
-import Logo from "../components/atom/Logo";
-import Title from "../components/atom/Title";
+import HeaderBar from "../components/organism/HeaderBar";
+import FullHeight from "../styles/fullheight";
 
-export default function Home() {
+const Home = ({ className }) => {
   return (
-    <div>
+    <div className={className}>
       <Head>
         <title>Captweet</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
-
+      <header>
+        <HeaderBar />
+      </header>
       <main>
-        <Logo />
-        <Title>Capteet</Title>
+        <div className="login">Login container</div>
       </main>
-
-      <footer></footer>
+      <footer>footer</footer>
+      <FullHeight />
     </div>
   );
-}
+};
+
+export default styled(Home)`
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+
+  main {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  footer {
+  }
+`;
