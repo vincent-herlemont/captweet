@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const Title = ({ className }) => {
-  return <h1 className={className}>captweet</h1>;
+const Title = ({ className, children }) => {
+  return <h1 className={className}>{children}</h1>;
 };
 
-export default styled(Title)`
-  color: ${(props) => props.theme.color.yellow};
+export default styled(Title).attrs((props) => ({
+  color: props.color || props.theme.color.yellow,
+}))`
+  color: ${(props) => props.color};
   font-family: Roboto Slab;
   font-style: normal;
   font-weight: 900;

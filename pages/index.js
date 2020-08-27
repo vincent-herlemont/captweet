@@ -10,6 +10,13 @@ const Home = ({ className }) => {
   const router = useRouter();
   let [search, setSearch] = useContext(SearchCtx);
 
+  fetch("/api/twitter_auth", { method: "POST" }).then((response) => {
+    console.log(response);
+    response.json().then((data) => {
+      console.log(data);
+    });
+  });
+
   return (
     <div className={className}>
       <Head>
@@ -18,7 +25,7 @@ const Home = ({ className }) => {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <header>
-        <HeaderBar />
+        <HeaderBar title="captweet" />
       </header>
       <main>
         <div className="login">Login container</div>
@@ -32,7 +39,8 @@ const Home = ({ className }) => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              router.push("search");
+
+              //router.push("search");
             }}
           >
             Search
@@ -49,6 +57,15 @@ export default styled(Home)`
   height: 100%;
   display: flex;
   flex-flow: column;
+
+  background: linear-gradient(
+      180deg,
+      ${(props) => props.theme.color.dark_blue} 13.02%,
+      ${(props) => props.theme.color.twitter_blue} 94.79%
+    ),
+    #ffffff;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 
   main {
     flex: 1;

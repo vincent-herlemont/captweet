@@ -4,14 +4,6 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { SearchCtxProvider } from "../utils/SearchCtx";
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    background: linear-gradient(180deg, ${(props) =>
-      props.theme.color.dark_blue} 13.02%, ${(props) =>
-  props.theme.color.twitter_blue} 94.79%), #FFFFFF;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
-  
   @font-face {
     font-family: 'Roboto Slab';
     font-style: normal;

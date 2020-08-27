@@ -2,25 +2,40 @@ import React from "react";
 import styled from "styled-components";
 import Logo from "../atom/Logo";
 import Title from "../atom/Title";
+import { useRouter } from "next/router";
 
-const HeaderBar = ({ className }) => {
+const HeaderBar = ({ className, title }) => {
+  const router = useRouter();
+
   return (
     <div className={className}>
-      <div className="fix">
+      <div
+        onClick={() => {
+          router.push("/");
+        }}
+        className="fix"
+      >
         <Logo />
       </div>
-      <Title />
+      <Title>{title}</Title>
     </div>
   );
 };
 
-export default styled(HeaderBar)`
+export default styled(HeaderBar).attrs((props) => ({
+  color: props.invert ? props.theme.color.dark_blue : props.theme.color.yellow,
+  backgroundColor: props.invert
+    ? props.theme.color.yellow
+    : props.theme.color.dark_blue,
+}))`
   display: flex;
   flex-flow: row;
   position: relative;
   align-items: center;
   justify-content: center;
   height: 4em;
+
+  background-color: ${(props) => props.backgroundColor};
 
   .fix {
     position: absolute;
@@ -40,6 +55,7 @@ export default styled(HeaderBar)`
   }
 
   ${Title} {
+    color: ${(props) => props.color};
     flex: 1;
     text-align: center;
   }
