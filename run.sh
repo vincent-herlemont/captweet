@@ -1,4 +1,2 @@
-#!/bin/sh
-declare -r all=$ALL
-
-declare -p all
+#!/bin/bash
+npm run dev
