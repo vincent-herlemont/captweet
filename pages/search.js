@@ -1,15 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Head from "next/head";
 import styled, { useTheme } from "styled-components";
 import FullHeight from "../styles/fullheight";
 import SearchCtx from "../utils/SearchCtx";
 import HeaderBar from "../components/organism/HeaderBar";
+import qs from "qs";
+import TwitterCfg from "../utils/TwitterCfg";
 
 const Search = ({ className }) => {
   const [search] = useContext(SearchCtx);
   const theme = useTheme();
-  console.log(theme);
 
+  useEffect(() => {
+    fetch("/api/twitter_following" + window.location.search, {
+      method: "GET",
+    }).then((response) => {
+      response.json().then((data) => {
+        console.log(data);
+      });
+    });
+  }, []);
   return (
     <div className={className}>
       <Head>

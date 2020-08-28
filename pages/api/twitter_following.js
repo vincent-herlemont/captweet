@@ -12,6 +12,8 @@ let oauth_token_secret = process.env.OAUTH_TOKEN_SECRET;
 let oauth_callback = process.env.OAUTH_CALLBACK;
 
 export default async (req, res) => {
+  console.log(req.query);
+
   const oauth = OAuth({
     consumer: { key: oauth_consumer_key, secret: oauth_consumer_secret },
     signature_method: "HMAC-SHA1",
@@ -24,7 +26,7 @@ export default async (req, res) => {
   });
 
   const request_data = {
-    url: TwitterCfg.request_token_url,
+    url: TwitterCfg.access_token_url,
     method: "POST",
     data: { oauth_callback: oauth_callback },
   };
@@ -36,26 +38,5 @@ export default async (req, res) => {
 
   let content = oauth.authorize(request_data, token);
 
-  let p = new Promise((resolve, reject) => {
-    axios({
-      baseURL: request_data.url,
-      method: request_data.method,
-      data: request_data.data,
-      headers: oauth.toHeader(content),
-    })
-      .then((resp) => {
-        console.log(resp.statusText);
-        console.log(resp.data);
-        resolve(resp.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        reject();
-      });
-  });
-
-  let response = await p;
-  let objResponse = qs.parse(response);
-
-  res.json(objResponse);
+  res.json({ query: req.query });
 };
