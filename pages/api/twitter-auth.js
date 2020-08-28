@@ -1,6 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 import TwitterCfg from "../../utils/TwitterCfg";
+import faunadb from "faunadb";
 
 const crypto = require("crypto");
 const OAuth = require("oauth-1.0a");
@@ -11,7 +12,9 @@ let oauth_token_key = process.env.OAUTH_TOKEN_KEY;
 let oauth_token_secret = process.env.OAUTH_TOKEN_SECRET;
 let oauth_callback = process.env.OAUTH_CALLBACK;
 
-export default async (req, res) => {
+let faunadb_secret = process.env.FAUNADB_SECRET;
+
+module.exports = async (req, res) => {
   const oauth = OAuth({
     consumer: { key: oauth_consumer_key, secret: oauth_consumer_secret },
     signature_method: "HMAC-SHA1",
@@ -28,6 +31,8 @@ export default async (req, res) => {
     method: "POST",
     data: { oauth_callback: oauth_callback },
   };
+
+  console.log(request_data);
 
   const token = {
     key: oauth_token_key,
@@ -49,13 +54,28 @@ export default async (req, res) => {
         resolve(resp.data);
       })
       .catch((err) => {
-        console.log(err);
+        if (err) {
+          console.log(err.response.status);
+          console.log(err.response.data);
+        }
         reject();
       });
   });
 
   let response = await p;
   let objResponse = qs.parse(response);
+
+  let client = new faunadb.Client({ secret: faunadb_secret });
+  let q = faunadb.query;
+
+  client.query(
+    q.Create(q.Collection("tweet_oauth_token_secret"), {
+      data: {
+        oauth_token: objResponse.oauth_token,
+        oauth_token_secret: objResponse.oauth_token_secret,
+      },
+    })
+  );
 
   res.json(objResponse);
 };

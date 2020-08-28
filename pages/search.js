@@ -12,9 +12,10 @@ const Search = ({ className }) => {
   const theme = useTheme();
 
   useEffect(() => {
-    fetch("/api/twitter_following" + window.location.search, {
+    fetch("/api/twitter-following" + window.location.search, {
       method: "GET",
     }).then((response) => {
+      ``;
       response.json().then((data) => {
         console.log(data);
       });

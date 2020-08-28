@@ -11,7 +11,7 @@ const Home = ({ className }) => {
   let [twitterAuthorizeUrl, setTwitterAuthorizeUrl] = useState(null);
 
   useEffect(() => {
-    fetch("/api/twitter_auth", { method: "POST" }).then((response) => {
+    fetch("/api/twitter-auth", { method: "POST" }).then((response) => {
       console.log(response);
       response.json().then((data) => {
         console.log(data);
