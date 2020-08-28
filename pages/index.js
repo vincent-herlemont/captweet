@@ -1,21 +1,25 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import HeaderBar from "../components/organism/HeaderBar";
 import FullHeight from "../styles/fullheight";
-import { useRouter } from "next/router";
 import SearchCtx from "../utils/SearchCtx";
+import TwitterCfg from "../utils/TwitterCfg";
 
 const Home = ({ className }) => {
-  const router = useRouter();
   let [search, setSearch] = useContext(SearchCtx);
+  let [twitterAuthorizeUrl, setTwitterAuthorizeUrl] = useState(null);
 
-  fetch("/api/twitter_auth", { method: "POST" }).then((response) => {
-    console.log(response);
-    response.json().then((data) => {
-      console.log(data);
+  useEffect(() => {
+    fetch("/api/twitter_auth", { method: "POST" }).then((response) => {
+      console.log(response);
+      response.json().then((data) => {
+        console.log(data);
+        let url = TwitterCfg.authorize_url + "?oauth_token=" + data.oauth_token;
+        setTwitterAuthorizeUrl(url);
+      });
     });
-  });
+  }, []);
 
   return (
     <div className={className}>
@@ -36,15 +40,7 @@ const Home = ({ className }) => {
             onFocus={() => setSearch("")}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-
-              //router.push("search");
-            }}
-          >
-            Search
-          </button>
+          {twitterAuthorizeUrl && <a href={twitterAuthorizeUrl}>Search</a>}
         </div>
       </main>
       <footer>footer</footer>

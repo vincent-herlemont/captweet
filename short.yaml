@@ -1,6 +1,4 @@
 ---
 setups:
-  android:
+  web:
     file: run.sh
-    array_vars:
-      all: ".*"
