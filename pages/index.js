@@ -5,20 +5,24 @@ import HeaderBar from "../components/organism/HeaderBar";
 import FullHeight from "../styles/fullheight";
 import SearchCtx from "../utils/SearchCtx";
 import TwitterCfg from "../utils/TwitterCfg";
+import { Url } from "../utils/Api";
 
 const Home = ({ className }) => {
   let [search, setSearch] = useContext(SearchCtx);
   let [twitterAuthorizeUrl, setTwitterAuthorizeUrl] = useState(null);
 
   useEffect(() => {
-    fetch("/api/twitter-auth", { method: "POST" }).then((response) => {
-      console.log(response);
-      response.json().then((data) => {
-        console.log(data);
-        let url = TwitterCfg.authorize_url + "?oauth_token=" + data.oauth_token;
-        setTwitterAuthorizeUrl(url);
-      });
-    });
+    fetch(Url("api/twitter-auth"), { method: "POST", mode: "cors" }).then(
+      (response) => {
+        console.log(response);
+        response.json().then((data) => {
+          console.log(data);
+          let url =
+            TwitterCfg.authorize_url + "?oauth_token=" + data.oauth_token;
+          setTwitterAuthorizeUrl(url);
+        });
+      }
+    );
   }, []);
 
   return (

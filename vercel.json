@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "env": {
+    "URL_API_ORIGIN": "",
+    "OAUTH_CONSUMER_KEY": "@oauth-consumer-key-production-klac",
+    "OAUTH_CONSUMER_SECRET": "@oauth-consumer-secret-production-mkvk",
+    "OAUTH_TOKEN_KEY" : "@oauth-token-key-production-w28o",
+    "OAUTH_TOKEN_SECRET" : "@oauth-token-secret-production-d2h7",
+    "OAUTH_CALLBACK" : "@oauth-callback-production-o83x",
+    "FAUNADB_SECRET" : "@faunadb-secret-a4451cda46"
+  },
+  "functions": {
+    "pages/api/twitter-auth.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    },
+    "pages/api/twitter-following.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "github": {
+    "enabled": true
+  }
+}

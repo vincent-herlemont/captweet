@@ -6,14 +6,16 @@ import SearchCtx from "../utils/SearchCtx";
 import HeaderBar from "../components/organism/HeaderBar";
 import qs from "qs";
 import TwitterCfg from "../utils/TwitterCfg";
+import { Url } from "../utils/Api";
 
 const Search = ({ className }) => {
   const [search] = useContext(SearchCtx);
   const theme = useTheme();
 
   useEffect(() => {
-    fetch("/api/twitter-following" + window.location.search, {
+    fetch(Url("api/twitter-following" + window.location.search), {
       method: "GET",
+      mode: "cors",
     }).then((response) => {
       ``;
       response.json().then((data) => {
