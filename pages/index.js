@@ -6,6 +6,9 @@ import FullHeight from "../styles/fullheight";
 import SearchCtx from "../utils/SearchCtx";
 import TwitterCfg from "../utils/TwitterCfg";
 import { Url } from "../utils/Api";
+import { Plugins } from "@capacitor/core";
+
+const { WebViewPlugin, Browser } = Plugins;
 
 const Home = ({ className }) => {
   let [search, setSearch] = useContext(SearchCtx);
@@ -44,7 +47,15 @@ const Home = ({ className }) => {
             onFocus={() => setSearch("")}
             onChange={(e) => setSearch(e.target.value)}
           />
-          {twitterAuthorizeUrl && <a href={twitterAuthorizeUrl}>Search</a>}
+          {twitterAuthorizeUrl && (
+            <button
+              onClick={async () => {
+                await Browser.open({ url: twitterAuthorizeUrl });
+              }}
+            >
+              Search
+            </button>
+          )}
         </div>
       </main>
       <footer>footer</footer>

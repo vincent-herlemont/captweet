@@ -26,9 +26,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="@string/custom_url_scheme" />
+                <data android:scheme="https" android:host="captor.vercel.app" />
             </intent-filter>
-
         </activity>
 
         <provider
