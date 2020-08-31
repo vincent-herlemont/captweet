@@ -13,7 +13,7 @@ let faunadb_secret = process.env.FAUNADB_SECRET;
 export default async (req, res) => {
   console.log("r1", req.query);
 
-  let client = new faunadb.Client({ secret: faunadb_secret });
+  let client = new faunadb.Client({ secret: faunadb_secret, timeout: 5000 });
   let q = faunadb.query;
 
   let obj_auth_token = await client.query(
@@ -53,24 +53,32 @@ export default async (req, res) => {
 
   let content = oauth.authorize(request_data, token);
 
-  let ok = await axios({
-    baseURL: request_data.url,
-    method: request_data.method,
-    data: request_data.data,
-    headers: oauth.toHeader(content),
-  })
-    .then((resp) => {
-      console.log("r4", resp.statusText);
-      console.log("r4", resp.data);
+  const p = new Promise((resolve, reject) => {
+    axios({
+      baseURL: request_data.url,
+      method: request_data.method,
+      data: request_data.data,
+      headers: oauth.toHeader(content),
     })
-    .catch((err) => {
-      if (err) {
-        console.log("r4.1", err.response.status);
-        console.log("r4.1", err.response.data);
-      }
-    });
+      .then((resp) => {
+        console.log("r4", resp.statusText);
+        console.log("r4", resp.data);
+        resolve({
+          status: resp.statusText,
+          data: resp.data,
+        });
+      })
+      .catch((err) => {
+        if (err) {
+          console.log("r4.1", err.response.status);
+          console.log("r4.1", err.response.data);
+          resolve({
+            status: err.response.status,
+            data: err.response.data,
+          });
+        }
+      });
+  });
 
-  console.log("OK", ok);
-
-  res.json({ query: req.query });
+  res.json({ query: req.query, rep: await p });
 };

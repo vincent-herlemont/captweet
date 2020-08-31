@@ -7,6 +7,7 @@ import SearchCtx from "../utils/SearchCtx";
 import TwitterCfg from "../utils/TwitterCfg";
 import { Url } from "../utils/Api";
 import { Plugins } from "@capacitor/core";
+import { Capacitor } from "@capacitor/core";
 
 const { WebViewPlugin, Browser } = Plugins;
 
@@ -15,17 +16,23 @@ const Home = ({ className }) => {
   let [twitterAuthorizeUrl, setTwitterAuthorizeUrl] = useState(null);
 
   useEffect(() => {
-    fetch(Url("api/twitter-auth"), { method: "POST", mode: "cors" }).then(
-      (response) => {
-        console.log(response);
-        response.json().then((data) => {
-          console.log(data);
-          let url =
-            TwitterCfg.authorize_url + "?oauth_token=" + data.oauth_token;
-          setTwitterAuthorizeUrl(url);
-        });
-      }
-    );
+    fetch(Url("api/twitter-auth"), {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        isNative: Capacitor.isNative,
+      }),
+    }).then((response) => {
+      console.log(response);
+      response.json().then((data) => {
+        console.log(data);
+        let url = TwitterCfg.authorize_url + "?oauth_token=" + data.oauth_token;
+        setTwitterAuthorizeUrl(url);
+      });
+    });
   }, []);
 
   return (

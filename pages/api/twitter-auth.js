@@ -15,6 +15,8 @@ let oauth_callback = process.env.OAUTH_CALLBACK;
 let faunadb_secret = process.env.FAUNADB_SECRET;
 
 module.exports = async (req, res) => {
+  console.log(req.body.isNative);
+
   const oauth = OAuth({
     consumer: { key: oauth_consumer_key, secret: oauth_consumer_secret },
     signature_method: "HMAC-SHA1",
@@ -29,7 +31,7 @@ module.exports = async (req, res) => {
   const request_data = {
     url: TwitterCfg.request_token_url,
     method: "POST",
-    data: { oauth_callback: oauth_callback },
+    data: { oauth_callback },
   };
 
   console.log(request_data);
@@ -65,10 +67,10 @@ module.exports = async (req, res) => {
   let response = await p;
   let objResponse = qs.parse(response);
 
-  let client = new faunadb.Client({ secret: faunadb_secret });
+  let client = new faunadb.Client({ secret: faunadb_secret, timeout: 5000 });
   let q = faunadb.query;
 
-  client.query(
+  await client.query(
     q.Create(q.Collection("tweet_oauth_token_secret"), {
       data: {
         oauth_token: objResponse.oauth_token,
