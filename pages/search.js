@@ -6,22 +6,37 @@ import SearchCtx from "../utils/SearchCtx";
 import HeaderBar from "../components/organism/HeaderBar";
 import { Url } from "../utils/Api";
 import { useState } from "react";
+import { Plugins } from "@capacitor/core";
+import AuthCtx from "../utils/Auth";
+const { Storage } = Plugins;
 
 const Search = ({ className }) => {
   const [search] = useContext(SearchCtx);
+  const authCtx = useContext(AuthCtx);
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch(Url("api/twitter-following" + window.location.search), {
-      method: "GET",
-      mode: "cors",
-    }).then((response) => {
-      response.json().then((data) => {
-        console.log(data);
-        setData(data);
+    const workflow = async () => {
+      if (await authCtx.isAuthenticated()) {
+        return;
+      }
+      fetch(Url("api/twitter-following" + window.location.search), {
+        method: "GET",
+        mode: "cors",
+      }).then((response) => {
+        response.json().then((data) => {
+          if (data.status === "OK") {
+            authCtx.saveSession(data.value);
+          } else {
+            console.error("fail to log", data);
+          }
+        });
       });
-    });
+    };
+
+    workflow();
   }, []);
+
   return (
     <div className={className}>
       <Head>
@@ -33,7 +48,14 @@ const Search = ({ className }) => {
         <HeaderBar invert={true} title="captweet" />
       </header>
       <main>
-        Search : {search} -> <pre>{JSON.stringify(data, 0, 1)}</pre>
+        <button
+          onClick={() => {
+            authCtx.removeSession();
+          }}
+        >
+          X
+        </button>
+        <div>{authCtx.token.status ? "true" : "false"}</div>
       </main>
       <footer>footer</footer>
       <FullHeight />

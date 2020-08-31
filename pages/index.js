@@ -8,31 +8,43 @@ import TwitterCfg from "../utils/TwitterCfg";
 import { Url } from "../utils/Api";
 import { Plugins } from "@capacitor/core";
 import { Capacitor } from "@capacitor/core";
+import { useRouter } from "next/router";
+import AuthCtx from "../utils/Auth";
 
-const { WebViewPlugin, Browser } = Plugins;
+const { Browser } = Plugins;
 
 const Home = ({ className }) => {
   let [search, setSearch] = useContext(SearchCtx);
+  let authCtx = useContext(AuthCtx);
+
   let [twitterAuthorizeUrl, setTwitterAuthorizeUrl] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    fetch(Url("api/twitter-auth"), {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        isNative: Capacitor.isNative,
-      }),
-    }).then((response) => {
-      console.log(response);
-      response.json().then((data) => {
-        console.log(data);
-        let url = TwitterCfg.authorize_url + "?oauth_token=" + data.oauth_token;
-        setTwitterAuthorizeUrl(url);
+    const workflow = async () => {
+      if (await authCtx.isAuthenticated()) {
+        router.push("/search");
+        return;
+      }
+      fetch(Url("api/twitter-auth"), {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          isNative: Capacitor.isNative,
+        }),
+      }).then((response) => {
+        response.json().then((data) => {
+          let url =
+            TwitterCfg.authorize_url + "?oauth_token=" + data.oauth_token;
+          setTwitterAuthorizeUrl(url);
+        });
       });
-    });
+    };
+
+    workflow();
   }, []);
 
   return (

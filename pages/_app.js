@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Plugins } from "@capacitor/core";
 const { App: CapApp } = Plugins;
 import { useRouter } from "next/router";
+import { AuthCtxProvider } from "../utils/Auth";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -24,19 +25,21 @@ function MyApp({ Component, pageProps }) {
       // slug = /tabs/tab2
       console.log("appUrlOpen", data);
       const slug = data.url.split(".app").pop();
-      if (slug) {
+      if (slug && slug !== "/") {
         router.replace(slug);
       }
       // If no match, do nothing - let regular routing
       // logic take over
     });
-  });
+  }, []);
   return (
     <ThemeProvider theme={theme}>
-      <SearchCtxProvider>
-        <Component {...pageProps} />
-        <GlobalStyle />
-      </SearchCtxProvider>
+      <AuthCtxProvider>
+        <SearchCtxProvider>
+          <Component {...pageProps} />
+          <GlobalStyle />
+        </SearchCtxProvider>
+      </AuthCtxProvider>
     </ThemeProvider>
   );
 }

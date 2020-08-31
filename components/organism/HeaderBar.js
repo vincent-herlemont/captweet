@@ -17,6 +17,7 @@ const HeaderBar = ({ className, title }) => {
       >
         <Logo />
       </div>
+
       <Title>{title}</Title>
     </div>
   );

@@ -15,7 +15,7 @@ let oauth_callback = process.env.OAUTH_CALLBACK;
 let faunadb_secret = process.env.FAUNADB_SECRET;
 
 module.exports = async (req, res) => {
-  console.log(req.body.isNative);
+  console.info(req.body.isNative);
 
   const oauth = OAuth({
     consumer: { key: oauth_consumer_key, secret: oauth_consumer_secret },
@@ -34,8 +34,6 @@ module.exports = async (req, res) => {
     data: { oauth_callback },
   };
 
-  console.log(request_data);
-
   const token = {
     key: oauth_token_key,
     secret: oauth_token_secret,
@@ -43,7 +41,7 @@ module.exports = async (req, res) => {
 
   let content = oauth.authorize(request_data, token);
 
-  let p = new Promise((resolve, reject) => {
+  let pRequest = new Promise((resolve, reject) => {
     axios({
       baseURL: request_data.url,
       method: request_data.method,
@@ -64,7 +62,7 @@ module.exports = async (req, res) => {
       });
   });
 
-  let response = await p;
+  let response = await pRequest;
   let objResponse = qs.parse(response);
 
   let client = new faunadb.Client({ secret: faunadb_secret, timeout: 5000 });
