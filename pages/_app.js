@@ -1,12 +1,12 @@
 import "../styles/globals.css";
 import theme from "../styles/theme";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { SearchCtxProvider } from "../utils/SearchCtx";
 import { useEffect } from "react";
 import { Plugins } from "@capacitor/core";
 const { App: CapApp } = Plugins;
 import { useRouter } from "next/router";
 import { AuthCtxProvider } from "../utils/Auth";
+import { DataCtxProvider } from "../utils/DataCtx";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -35,10 +35,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <AuthCtxProvider>
-        <SearchCtxProvider>
+        <DataCtxProvider>
           <Component {...pageProps} />
           <GlobalStyle />
-        </SearchCtxProvider>
+        </DataCtxProvider>
       </AuthCtxProvider>
     </ThemeProvider>
   );

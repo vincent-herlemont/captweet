@@ -3,7 +3,6 @@ import Head from "next/head";
 import styled from "styled-components";
 import HeaderBar from "../components/organism/HeaderBar";
 import FullHeight from "../styles/fullheight";
-import SearchCtx from "../utils/SearchCtx";
 import TwitterCfg from "../utils/TwitterCfg";
 import { Url } from "../utils/Api";
 import { Plugins } from "@capacitor/core";
@@ -14,7 +13,6 @@ import AuthCtx from "../utils/Auth";
 const { Browser } = Plugins;
 
 const Home = ({ className }) => {
-  let [search, setSearch] = useContext(SearchCtx);
   let authCtx = useContext(AuthCtx);
 
   let [twitterAuthorizeUrl, setTwitterAuthorizeUrl] = useState(null);

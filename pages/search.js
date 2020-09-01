@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import Head from "next/head";
 import styled, { useTheme } from "styled-components";
 import FullHeight from "../styles/fullheight";
-import SearchCtx from "../utils/SearchCtx";
 import HeaderBar from "../components/organism/HeaderBar";
 import { Url } from "../utils/Api";
 import { useState } from "react";
@@ -12,7 +11,6 @@ import TwitterCfg from "../utils/TwitterCfg";
 const { Storage } = Plugins;
 
 const Search = ({ className }) => {
-  const [search] = useContext(SearchCtx);
   const authCtx = useContext(AuthCtx);
   const [data, setData] = useState(null);
 
