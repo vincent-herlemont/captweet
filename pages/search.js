@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Capacitor, Plugins } from "@capacitor/core";
 import AuthCtx from "../utils/Auth";
 import TwitterCfg from "../utils/TwitterCfg";
+import UserList from "../components/organism/UserList";
 const { Storage } = Plugins;
 
 const Search = ({ className }) => {
@@ -70,14 +71,7 @@ const Search = ({ className }) => {
         <HeaderBar invert={true} title="captweet" />
       </header>
       <main>
-        <button
-          onClick={() => {
-            authCtx.removeSession();
-          }}
-        >
-          X
-        </button>
-        <div>{authCtx.token.status ? "true" : "false"}</div>
+        <UserList />
       </main>
       <footer>footer</footer>
       <FullHeight />
