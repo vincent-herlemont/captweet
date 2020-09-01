@@ -6,8 +6,9 @@ import SearchCtx from "../utils/SearchCtx";
 import HeaderBar from "../components/organism/HeaderBar";
 import { Url } from "../utils/Api";
 import { useState } from "react";
-import { Plugins } from "@capacitor/core";
+import { Capacitor, Plugins } from "@capacitor/core";
 import AuthCtx from "../utils/Auth";
+import TwitterCfg from "../utils/TwitterCfg";
 const { Storage } = Plugins;
 
 const Search = ({ className }) => {
@@ -36,6 +37,29 @@ const Search = ({ className }) => {
 
     workflow();
   }, []);
+
+  useEffect(() => {
+    const workflow = async () => {
+      if (!(authCtx.token && authCtx.token.status)) {
+        console.log("can not do that");
+        return;
+      }
+
+      console.log(authCtx.token.value);
+
+      fetch(Url("api/twitter-following"), {
+        method: "POST",
+        mode: "cors",
+        headers: authCtx.token.value,
+      }).then((response) => {
+        response.json().then((data) => {
+          console.log("data", data);
+        });
+      });
+    };
+
+    workflow();
+  }, [authCtx]);
 
   return (
     <div className={className}>
