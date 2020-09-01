@@ -20,7 +20,7 @@ const Search = ({ className }) => {
       if (await authCtx.isAuthenticated()) {
         return;
       }
-      fetch(Url("api/twitter-following" + window.location.search), {
+      fetch(Url("api/twitter-user-tokens" + window.location.search), {
         method: "GET",
         mode: "cors",
       }).then((response) => {
