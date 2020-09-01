@@ -37,28 +37,28 @@ const Search = ({ className }) => {
     workflow();
   }, []);
 
-  useEffect(() => {
-    const workflow = async () => {
-      if (!(authCtx.token && authCtx.token.status)) {
-        console.log("can not do that");
-        return;
-      }
-
-      console.log(authCtx.token.value);
-
-      fetch(Url("api/twitter-following"), {
-        method: "POST",
-        mode: "cors",
-        headers: authCtx.token.value,
-      }).then((response) => {
-        response.json().then((data) => {
-          console.log("data", data);
-        });
-      });
-    };
-
-    workflow();
-  }, [authCtx]);
+  // useEffect(() => {
+  //   const workflow = async () => {
+  //     if (!(authCtx.token && authCtx.token.status)) {
+  //       console.log("can not do that");
+  //       return;
+  //     }
+  //
+  //     console.log(authCtx.token.value);
+  //
+  //     fetch(Url("api/twitter-following"), {
+  //       method: "POST",
+  //       mode: "cors",
+  //       headers: authCtx.token.value,
+  //     }).then((response) => {
+  //       response.json().then((data) => {
+  //         console.log("data", data);
+  //       });
+  //     });
+  //   };
+  //
+  //   workflow();
+  // }, [authCtx]);
 
   return (
     <div className={className}>

@@ -5,7 +5,7 @@ export default async (req, res) => {
 
   const client = new TwitterApi(
     {
-      url: "https://api.twitter.com/1.1/friends/list.json?count=20",
+      url: "https://api.twitter.com/1.1/friends/list.json?count=200",
       method: "GET",
     },
     {

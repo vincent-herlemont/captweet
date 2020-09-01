@@ -22,7 +22,7 @@ export const AuthCtxProvider = ({ children }) => {
           return token;
         }
       } catch (e) {
-        console.error("fail to load session from local storage");
+        console.error("fail to load session from local storage", e);
       }
     },
     saveSession: async function (data) {

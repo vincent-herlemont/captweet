@@ -58,12 +58,6 @@ const Home = ({ className }) => {
       <main>
         <div className="login">Login container</div>
         <div>
-          <input
-            type="text"
-            value={search}
-            onFocus={() => setSearch("")}
-            onChange={(e) => setSearch(e.target.value)}
-          />
           {twitterAuthorizeUrl && (
             <button
               onClick={async () => {
