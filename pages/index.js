@@ -56,7 +56,6 @@ const Home = ({ className }) => {
         <HeaderBar title="captweet" />
       </header>
       <main>
-        <div className="login">Login container</div>
         <div>
           {twitterAuthorizeUrl && (
             <button
@@ -64,7 +63,7 @@ const Home = ({ className }) => {
                 await Browser.open({ url: twitterAuthorizeUrl });
               }}
             >
-              Search
+              Loggin with twitter
             </button>
           )}
         </div>

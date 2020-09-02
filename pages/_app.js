@@ -13,7 +13,28 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto Slab';
     font-style: normal;
     font-weight: 700;
-    src: url(/fonts/static/RobotoSlab-Bold.ttf) format('woff2');
+    src: url(/fonts/roboto_slab/static/RobotoSlab-Bold.ttf) format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: url(/fonts/roboto/Roboto-Bold.ttf) format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/roboto/Roboto-Regular.ttf) format('woff2');
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 200;
+    src: url(/fonts/roboto/Roboto-Light.ttf) format('woff2');
   }
 `;
 
