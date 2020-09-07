@@ -5,19 +5,24 @@ import FullHeight from "../styles/fullheight";
 import HeaderBar from "../components/organism/HeaderBar";
 import { Url } from "../utils/Api";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { Capacitor, Plugins } from "@capacitor/core";
 import AuthCtx from "../utils/Auth";
-import TwitterCfg from "../utils/TwitterCfg";
 import UserList from "../components/organism/UserList";
+import DataCtx from "../utils/DataCtx";
 const { Storage } = Plugins;
 
 const Search = ({ className }) => {
   const authCtx = useContext(AuthCtx);
-  const [data, setData] = useState(null);
+  const router = useRouter();
+  const dataCtx = useContext(DataCtx);
 
   useEffect(() => {
     const workflow = async () => {
       if (await authCtx.isAuthenticated()) {
+        if (await dataCtx.game.isStart()) {
+          await router.push("/game");
+        }
         return;
       }
       fetch(Url("api/twitter-user-tokens" + window.location.search), {
@@ -36,29 +41,6 @@ const Search = ({ className }) => {
 
     workflow();
   }, []);
-
-  // useEffect(() => {
-  //   const workflow = async () => {
-  //     if (!(authCtx.token && authCtx.token.status)) {
-  //       console.log("can not do that");
-  //       return;
-  //     }
-  //
-  //     console.log(authCtx.token.value);
-  //
-  //     fetch(Url("api/twitter-following"), {
-  //       method: "POST",
-  //       mode: "cors",
-  //       headers: authCtx.token.value,
-  //     }).then((response) => {
-  //       response.json().then((data) => {
-  //         console.log("data", data);
-  //       });
-  //     });
-  //   };
-  //
-  //   workflow();
-  // }, [authCtx]);
 
   return (
     <div className={className}>

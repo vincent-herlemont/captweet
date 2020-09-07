@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useRequest } from "./Api";
 import { useStorage } from "./Storage";
+import _ from "lodash";
 
 const DataCtx = React.createContext({});
 export default DataCtx;
@@ -8,6 +9,7 @@ export default DataCtx;
 const USERS_STORAGE_KEY = "users";
 const PROFILE_STORAGE_KEY = "profile";
 const TWEETS_STORAGE_KEY = "tweets";
+const TARGET_USER_STORAGE_KEY = "target_user";
 
 export const DataCtxProvider = ({ children }) => {
   const requestData = useRequest();
@@ -15,7 +17,14 @@ export const DataCtxProvider = ({ children }) => {
 
   const [profileData, setProfileData] = useState({});
   const [usersData, setUsersData] = useState({});
-  const [tweetsData, setTweetsData] = useState({});
+  const [pools, setPools] = useState([]);
+  const [targetUser, setTargetUser] = useState({});
+
+  const loadTargetUser = async function () {
+    let user = await getFromStorage(TARGET_USER_STORAGE_KEY, 1000);
+    setTargetUser(user);
+    return user;
+  };
 
   const data = {
     profile: {
@@ -35,8 +44,22 @@ export const DataCtxProvider = ({ children }) => {
         saveToStorage(USERS_STORAGE_KEY, data);
       },
     },
-    tweets: {
-      data: tweetsData,
+    game: {
+      users_tweets: [],
+      getTweets: async function () {},
+      targetUser,
+      setTargetUser: async function (user) {
+        user = _.cloneDeep(user);
+        saveToStorage(TARGET_USER_STORAGE_KEY, user);
+        setTargetUser(user);
+      },
+      loadTargetUser,
+      isStart: async () => {
+        let user = await loadTargetUser();
+        return user && user.id;
+      },
+      pools,
+      createPool: function () {},
     },
   };
 

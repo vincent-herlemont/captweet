@@ -21,7 +21,7 @@ const Home = ({ className }) => {
   useEffect(() => {
     const workflow = async () => {
       if (await authCtx.isAuthenticated()) {
-        router.push("/search");
+        await router.push("/search");
         return;
       }
       fetch(Url("api/twitter-auth"), {

@@ -3,9 +3,9 @@ import styled from "styled-components";
 import ProfilePic from "../atom/ProfilePic";
 import ProfilePreview from "./ProfilePreview";
 
-const UserItem = ({ user, className }) => {
+const UserItem = ({ user, className, onClick }) => {
   return (
-    <div className={className}>
+    <div className={className} onClick={() => onClick(user)}>
       <ProfilePreview user={user} />
       <div>X</div>
     </div>

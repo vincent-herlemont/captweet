@@ -4,11 +4,13 @@ import React, { useState } from "react";
 
 const { Storage } = Plugins;
 
-const AuthCtx = React.createContext({ token: { status: false } });
+const defaultValues = { token: { status: false } };
+
+const AuthCtx = React.createContext(defaultValues);
 export default AuthCtx;
 
 export const AuthCtxProvider = ({ children }) => {
-  const [oauthTokens, setOauthTokens] = useState({ children });
+  const [oauthTokens, setOauthTokens] = useState(defaultValues);
 
   const auth = {
     token: oauthTokens,
