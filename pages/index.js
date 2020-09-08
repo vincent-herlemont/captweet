@@ -20,7 +20,8 @@ const Home = ({ className }) => {
 
   useEffect(() => {
     const workflow = async () => {
-      if (await authCtx.isAuthenticated()) {
+      console.log(authCtx.token);
+      if (authCtx.token.status) {
         await router.push("/search");
         return;
       }
@@ -43,7 +44,7 @@ const Home = ({ className }) => {
     };
 
     workflow();
-  }, []);
+  }, [authCtx.token]);
 
   return (
     <div className={className}>

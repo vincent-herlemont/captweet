@@ -19,28 +19,23 @@ const Search = ({ className }) => {
 
   useEffect(() => {
     const workflow = async () => {
-      if (await authCtx.isAuthenticated()) {
-        if (await dataCtx.game.isStart()) {
-          await router.push("/game");
-        }
+      const { status, loading, saveSession } = authCtx.token;
+      console.log(status, loading);
+      if (!status && !loading) {
+        await router.push("/");
         return;
       }
-      fetch(Url("api/twitter-user-tokens" + window.location.search), {
-        method: "GET",
-        mode: "cors",
-      }).then((response) => {
-        response.json().then((data) => {
-          if (data.status === "OK") {
-            authCtx.saveSession(data.value);
-          } else {
-            console.error("fail to log", data);
-          }
-        });
-      });
+
+      // if (await authCtx.isAuthenticated()) {
+      //   if (await dataCtx.game.isStart()) {
+      //     await router.push("/game");
+      //   }
+      //   return;
+      // }
     };
 
     workflow();
-  }, []);
+  }, [authCtx.token]);
 
   return (
     <div className={className}>
