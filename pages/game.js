@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 import styled from "styled-components";
 import Head from "next/head";
@@ -6,6 +6,7 @@ import HeaderBar from "../components/organism/HeaderBar";
 import FullHeight from "../styles/fullheight";
 import DataCtx from "../utils/DataCtx";
 import { useRouter } from "next/router";
+import GameHeader from "../components/molecule/GameHeader";
 
 const Game = ({ className }) => {
   let dataCtx = useContext(DataCtx);
@@ -34,6 +35,11 @@ const Game = ({ className }) => {
         <HeaderBar title="captweet" />
       </header>
       <main>
+        {dataCtx.game.targetUser && dataCtx.game.targetUser.id && (
+          <React.Fragment>
+            <GameHeader user={dataCtx.game.targetUser} />
+          </React.Fragment>
+        )}
         ... | {dataCtx.game.targetUser && dataCtx.game.targetUser.id} |
       </main>
       <footer>footer</footer>

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ProfilePic from "../atom/ProfilePic";
 import ProfilePreview from "./ProfilePreview";
 
 const UserItem = ({ user, className, onClick }) => {
