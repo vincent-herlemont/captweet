@@ -15,7 +15,7 @@ export const useRequest = function () {
 
   return async (url) => {
     if (!(authCtx.token && authCtx.token.status)) {
-      console.log("can not do that", authCtx.token);
+      console.info("can not do that", authCtx.token);
       return;
     }
     console.info("Get data from ", url);

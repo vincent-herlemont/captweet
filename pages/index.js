@@ -20,7 +20,6 @@ const Home = ({ className }) => {
 
   useEffect(() => {
     const workflow = async () => {
-      console.log(authCtx.token);
       if (authCtx.token.status) {
         await router.push("/search");
         return;
