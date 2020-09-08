@@ -3,11 +3,9 @@ import styled from "styled-components";
 import ProfilePic from "../atom/ProfilePic";
 
 const GameHeader = ({ className, user }) => {
-  console.log(user);
-
   return (
     <div className={className}>
-      <div class="question">Find {user.name}'s tweet !</div>
+      <div className="question">Find {user.name}'s tweet !</div>
       <div className="profile_pic">
         <ProfilePic url={user.profile_image_url_https} size={7} />
       </div>

@@ -10,7 +10,11 @@ import TweetList from "../components/organism/TweetList";
 
 const Game = ({ className }) => {
   const dataCtx = useContext(DataCtx);
-  const { targetUser } = dataCtx.game.data;
+  const { value: targetUser } = dataCtx.game.data.targetUser;
+
+  useEffect(() => {
+    console.log("dataCtx.game.data.quiz.value", dataCtx.game.data.quiz.value);
+  }, [dataCtx.game.data.quiz.value]);
 
   return (
     <div className={className}>
@@ -26,7 +30,9 @@ const Game = ({ className }) => {
         {targetUser && targetUser.id && (
           <React.Fragment>
             <GameHeader user={targetUser} />
-            <TweetList />
+            {dataCtx.game.data.quiz.value.map((value) => {
+              return <TweetList tweets={value.tweets} />;
+            })}
           </React.Fragment>
         )}
         ... | {targetUser && targetUser.id} |

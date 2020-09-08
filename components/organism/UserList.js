@@ -9,8 +9,8 @@ const UserList = ({ className }) => {
   const dataCtx = useContext(DataCtx);
   const router = useRouter();
 
-  if (dataCtx.users.data && dataCtx.users.data.status === "OK") {
-    const userItems = dataCtx.users.data.data.users.map((user) => {
+  if (dataCtx.users.data && dataCtx.users.data.length) {
+    const userItems = dataCtx.users.data.map((user) => {
       return (
         <UserItem
           key={user.id.toString()}
