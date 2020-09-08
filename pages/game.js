@@ -7,18 +7,23 @@ import FullHeight from "../styles/fullheight";
 import DataCtx from "../utils/DataCtx";
 import { useRouter } from "next/router";
 import GameHeader from "../components/molecule/GameHeader";
+import TweetList from "../components/organism/TweetList";
+import AuthCtx from "../utils/Auth";
 
 const Game = ({ className }) => {
-  let dataCtx = useContext(DataCtx);
-  let router = useRouter();
+  const dataCtx = useContext(DataCtx);
+  const router = useRouter();
+  const authCtx = useContext(AuthCtx);
 
   useEffect(() => {
     const workflow = async () => {
+      if (!(await authCtx.isAuthenticated())) {
+        return;
+      }
       if (!(await dataCtx.game.isStart())) {
         await router.push("/search");
       }
-
-      console.log(dataCtx.game);
+      await dataCtx.game.getTweets(dataCtx.game.targetUser.id);
     };
 
     workflow();
@@ -38,6 +43,7 @@ const Game = ({ className }) => {
         {dataCtx.game.targetUser && dataCtx.game.targetUser.id && (
           <React.Fragment>
             <GameHeader user={dataCtx.game.targetUser} />
+            <TweetList />
           </React.Fragment>
         )}
         ... | {dataCtx.game.targetUser && dataCtx.game.targetUser.id} |

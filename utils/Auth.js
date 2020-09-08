@@ -35,7 +35,6 @@ export const AuthCtxProvider = ({ children }) => {
       await this.fetchData();
       console.info("save session ok", data);
     },
-
     isAuthenticated: async function () {
       let token = await this.fetchData();
       return token ? token.status : false;

@@ -46,7 +46,10 @@ export const DataCtxProvider = ({ children }) => {
     },
     game: {
       users_tweets: [],
-      getTweets: async function () {},
+      getTweets: async function (userId) {
+        let data = await requestData(`api/twitter-user-timeline?id=${userId}`);
+        console.log("LOOOL", data);
+      },
       targetUser,
       setTargetUser: async function (user) {
         user = _.cloneDeep(user);
