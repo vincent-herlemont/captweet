@@ -16,13 +16,14 @@ const TARGET_USER_STORAGE_KEY = "target_user";
 const INITIAL_STATES = {
   targetUser: {
     isStart: false,
-    loading: true,
     value: {},
   },
   quiz: {
     isStart: false,
     loading: false,
     current: 0,
+    isEnded: false,
+    score: 0,
     value: [],
   },
 };
@@ -62,19 +63,9 @@ export const DataCtxProvider = ({ children }) => {
     await Promise.all(promises);
   }
 
-  async function loadTargetUser() {
-    let user = await getFromStorage(TARGET_USER_STORAGE_KEY, 1000);
-    dispatchGameData({ type: "load_target_user", targetUser: user });
-  }
-
   async function setTargetUser(user) {
     user = _.cloneDeep(user);
-    saveToStorage(TARGET_USER_STORAGE_KEY, user);
     dispatchGameData({ type: "load_target_user", targetUser: user });
-  }
-
-  async function removeTargetUser() {
-    await removeFromStorage(TARGET_USER_STORAGE_KEY);
   }
 
   async function getFollowing() {
@@ -113,7 +104,7 @@ export const DataCtxProvider = ({ children }) => {
             };
       }
       case "raz": {
-        removeTargetUser();
+        // removeTargetUser();
         return {
           ...INITIAL_STATES,
           targetUser: {
@@ -173,23 +164,27 @@ export const DataCtxProvider = ({ children }) => {
         };
       }
       case "select_tweet": {
+        let isValid = state.targetUser.value.id === action.tweet.user.id;
+        let quizValue = state.quiz.value.map((v, k) => {
+          if (state.quiz.current === k) {
+            return {
+              ...v,
+              selected_tweet: {
+                id: action.tweet.id,
+                valid: isValid,
+              },
+            };
+          } else {
+            return v;
+          }
+        });
         return {
           ...state,
           quiz: {
             ...state.quiz,
-            value: state.quiz.value.map((v, k) => {
-              if (state.quiz.current === k) {
-                return {
-                  ...v,
-                  selected_tweet: {
-                    id: action.tweet.id,
-                    valid: state.targetUser.value.id === action.tweet.user.id,
-                  },
-                };
-              } else {
-                return v;
-              }
-            }),
+            isEnded: state.quiz.current === state.quiz.value.length - 1,
+            score: isValid ? state.quiz.score + 1 : state.quiz.score,
+            value: quizValue,
           },
         };
       }
@@ -272,24 +267,21 @@ export const DataCtxProvider = ({ children }) => {
   }, [authCtx.token]);
 
   useEffect(() => {
-    loadTargetUser();
-  }, []);
-
-  useEffect(() => {
     const workflow = async () => {
+      console.log("ctx.game.data", ctx.game.data);
       const { status, loading: tokenLoading } = authCtx.token;
-      const { isStart, loading: gameLoading } = ctx.game.data.targetUser;
+      const { isStart } = ctx.game.data.targetUser;
       if (!status && !tokenLoading) {
         await router.push("/");
         return;
       }
 
-      if (!isStart && !gameLoading) {
+      if (!isStart) {
         await router.push("/search");
         return;
       }
 
-      if (isStart && !gameLoading) {
+      if (isStart && router.pathname === "/search") {
         await router.push("/game");
       }
 
@@ -303,6 +295,12 @@ export const DataCtxProvider = ({ children }) => {
 
     workflow();
   }, [authCtx.token, ctx.game.data.targetUser, ctx.users.data]);
+
+  useEffect(() => {
+    if (ctx.game.data.quiz.isEnded) {
+      router.push("/end");
+    }
+  }, [ctx.game.data.quiz.isEnded]);
 
   useEffect(() => {
     const workflow = async () => {

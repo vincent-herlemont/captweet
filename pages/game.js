@@ -13,15 +13,8 @@ const Game = ({ className }) => {
   const { value: targetUser } = dataCtx.game.data.targetUser;
 
   useEffect(() => {
-    console.log("dataCtx.game.data.quiz.value", dataCtx.game.data.quiz.value);
-  }, [dataCtx.game.data.quiz.value]);
-
-  useEffect(() => {
-    console.log(
-      "dataCtx.game.data.quiz.current",
-      dataCtx.game.data.quiz.current
-    );
-  }, [dataCtx.game.data.quiz.current]);
+    console.log("dataCtx.game.data", dataCtx.game.data);
+  }, [dataCtx.game.data]);
 
   return (
     <div className={className}>
