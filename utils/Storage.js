@@ -38,5 +38,9 @@ export const useStorage = function () {
         return false;
       }
     },
+    removeFromStorage: async (key) => {
+      await Storage.remove({ key: ttlStorageKeyName(key) });
+      await Storage.remove({ key });
+    },
   };
 };

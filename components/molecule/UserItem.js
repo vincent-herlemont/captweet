@@ -6,7 +6,7 @@ const UserItem = ({ user, className, onClick }) => {
   return (
     <div className={className} onClick={() => onClick(user)}>
       <ProfilePreview user={user} />
-      <div>X</div>
+      <div>X : {user.statuses_count}</div>
     </div>
   );
 };

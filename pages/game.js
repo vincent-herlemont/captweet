@@ -31,7 +31,12 @@ const Game = ({ className }) => {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <header>
-        <HeaderBar title="captweet" />
+        <HeaderBar
+          onClick={() => {
+            dataCtx.game.dispatch({ type: "raz" });
+          }}
+          title="captweet"
+        />
       </header>
       <main>
         {targetUser && targetUser.id && (

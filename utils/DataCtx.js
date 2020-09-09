@@ -13,10 +13,24 @@ const PROFILE_STORAGE_KEY = "profile";
 const TWEETS_STORAGE_KEY = "tweets";
 const TARGET_USER_STORAGE_KEY = "target_user";
 
+const INITIAL_STATES = {
+  targetUser: {
+    isStart: false,
+    loading: true,
+    value: {},
+  },
+  quiz: {
+    isStart: false,
+    loading: false,
+    current: 0,
+    value: [],
+  },
+};
+
 export const DataCtxProvider = ({ children }) => {
   const authCtx = useContext(AuthCtx);
   const requestData = useRequest();
-  const { saveToStorage, getFromStorage } = useStorage();
+  const { saveToStorage, getFromStorage, removeFromStorage } = useStorage();
   const router = useRouter();
 
   const [profileData, setProfileData] = useState({});
@@ -59,6 +73,10 @@ export const DataCtxProvider = ({ children }) => {
     dispatchGameData({ type: "load_target_user", targetUser: user });
   }
 
+  async function removeTargetUser() {
+    await removeFromStorage(TARGET_USER_STORAGE_KEY);
+  }
+
   async function getFollowing() {
     let localResp = await getFromStorage(USERS_STORAGE_KEY);
     if (localResp) {
@@ -93,6 +111,16 @@ export const DataCtxProvider = ({ children }) => {
                 value: {},
               },
             };
+      }
+      case "raz": {
+        removeTargetUser();
+        return {
+          ...INITIAL_STATES,
+          targetUser: {
+            ...INITIAL_STATES.targetUser,
+            loading: false,
+          },
+        };
       }
       case "start_quiz": {
         return !state.quiz.loading
@@ -155,7 +183,7 @@ export const DataCtxProvider = ({ children }) => {
   function pullTweet(userId) {
     let tweets = ctx.game.users_tweets[userId];
     let rand = _.random(0, tweets.length - 1);
-    return tweets[rand];
+    return _.pullAt(tweets, [rand])[0];
   }
 
   async function createQuiz() {
@@ -164,12 +192,18 @@ export const DataCtxProvider = ({ children }) => {
 
     _.pull(list_userIds, ctx.game.data.targetUser.value.id + "");
     let tweet = pullTweet(ctx.game.data.targetUser.value.id);
+    if (!tweet) {
+      return;
+    }
     tweets.push(tweet);
 
     for (let i = 0; i < 3; i++) {
       let r = _.random(0, list_userIds.length - 1);
       let userId = _.pullAt(list_userIds, [r])[0];
       if (!userId) {
+        if (i > list_userIds.length - 1) {
+          break;
+        }
         i++;
         continue;
       }
@@ -180,19 +214,7 @@ export const DataCtxProvider = ({ children }) => {
     dispatchGameData({ type: "add_quiz", tweets });
   }
 
-  const [gameData, dispatchGameData] = useReducer(gameAction, {
-    targetUser: {
-      isStart: false,
-      loading: true,
-      value: {},
-    },
-    quiz: {
-      isStart: false,
-      loading: false,
-      current: 0,
-      value: [],
-    },
-  });
+  const [gameData, dispatchGameData] = useReducer(gameAction, INITIAL_STATES);
 
   const ctx = {
     profile: {
@@ -238,6 +260,7 @@ export const DataCtxProvider = ({ children }) => {
         return;
       }
 
+      console.log("users", ctx.users);
       dispatchGameData({ type: "start_quiz" });
       // await getTweets(ctx.game.data.targetUser.id);
       // console.log("getTweets", ctx.game);
@@ -258,6 +281,8 @@ export const DataCtxProvider = ({ children }) => {
         console.log("randomUsers", randomUsers);
         await getTweetsByUsers(randomUsers);
         console.log(ctx.game.users_tweets);
+        await createQuiz();
+        await createQuiz();
         await createQuiz();
         await createQuiz();
 

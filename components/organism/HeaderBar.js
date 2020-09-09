@@ -4,14 +4,19 @@ import Logo from "../atom/Logo";
 import Title from "../atom/Title";
 import { useRouter } from "next/router";
 
-const HeaderBar = ({ className, title }) => {
+const HeaderBar = ({ className, title, onClick }) => {
   const router = useRouter();
+  onClick = onClick
+    ? onClick
+    : () => {
+        router.push("/");
+      };
 
   return (
     <div className={className}>
       <div
         onClick={() => {
-          router.push("/");
+          onClick();
         }}
         className="fix"
       >
