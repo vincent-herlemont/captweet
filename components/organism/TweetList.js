@@ -8,6 +8,8 @@ const TweetList = ({ className, data: { selected_tweet, tweets } }) => {
     game: { data, dispatch },
   } = useContext(DataCtx);
 
+  console.log(selected_tweet, tweets);
+
   return (
     <div className={className}>
       {tweets.map((tweet) => (
@@ -19,6 +21,7 @@ const TweetList = ({ className, data: { selected_tweet, tweets } }) => {
                 : "error"
               : false
           }
+          hide={!selected_tweet.id}
           onClick={() => {
             if (selected_tweet.id) {
               return;

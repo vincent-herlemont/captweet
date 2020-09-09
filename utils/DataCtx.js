@@ -225,6 +225,7 @@ export const DataCtxProvider = ({ children }) => {
     }
     tweets.push(tweet);
 
+    // TODO refactor loop
     for (let i = 0; i < 3; i++) {
       let r = _.random(0, list_userIds.length - 1);
       let userId = _.pullAt(list_userIds, [r])[0];
@@ -236,6 +237,13 @@ export const DataCtxProvider = ({ children }) => {
         continue;
       }
       let tweet = pullTweet(userId);
+      if (!tweet) {
+        if (i > list_userIds.length - 1) {
+          break;
+        }
+        i++;
+        continue;
+      }
       tweets.push(tweet);
     }
 

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ProfilePic from "../atom/ProfilePic";
 import theme from "../../styles/theme";
 
-const ProfilePreview = ({ className, user }) => {
+const ProfilePreview = ({ className, user, hide }) => {
+  if (hide) {
+    return (
+      <img
+        src="/img/tweet_header_hide.png"
+        style={{ width: "7em", height: "2.75em", margin: "0.3em" }}
+      />
+    );
+  }
   return (
     <div className={className}>
       <ProfilePic url={user.profile_image_url_https} />

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ProfilePreview from "./ProfilePreview";
 import twitterText from "twitter-text";
 
-const Tweet = ({ className, tweet, onClick }) => {
+const Tweet = ({ className, tweet, onClick, hide }) => {
   const [image, setImage] = useState(null);
   const [text, setText] = useState(tweet.text);
 
@@ -30,7 +30,7 @@ const Tweet = ({ className, tweet, onClick }) => {
       }}
       className={className}
     >
-      <ProfilePreview user={tweet.user} />
+      <ProfilePreview hide={hide} user={tweet.user} />
       <div className="body">
         <div className="text">{text}</div>
         {image && (
