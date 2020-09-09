@@ -103,9 +103,7 @@ export const DataCtxProvider = ({ children }) => {
                 loading: true,
               },
             }
-          : {
-              ...state,
-            };
+          : state;
       }
       case "add_quiz": {
         return {
@@ -118,6 +116,19 @@ export const DataCtxProvider = ({ children }) => {
                 tweets: action.tweets,
               },
             ],
+          },
+        };
+      }
+      case "move_quiz": {
+        let next_current = state.quiz.current + action.n;
+        if (next_current < 0 || next_current > state.quiz.value.length - 1) {
+          return state;
+        }
+        return {
+          ...state,
+          quiz: {
+            ...state.quiz,
+            current: next_current,
           },
         };
       }
@@ -178,6 +189,7 @@ export const DataCtxProvider = ({ children }) => {
     quiz: {
       isStart: false,
       loading: false,
+      current: 0,
       value: [],
     },
   });
@@ -246,6 +258,7 @@ export const DataCtxProvider = ({ children }) => {
         console.log("randomUsers", randomUsers);
         await getTweetsByUsers(randomUsers);
         console.log(ctx.game.users_tweets);
+        await createQuiz();
         await createQuiz();
 
         return;

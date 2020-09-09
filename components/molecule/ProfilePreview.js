@@ -3,16 +3,16 @@ import styled from "styled-components";
 import ProfilePic from "../atom/ProfilePic";
 import theme from "../../styles/theme";
 
-const ProfilePreview = ({ user, className }) => {
+const ProfilePreview = ({ className, user }) => {
   return (
     <div className={className}>
       <ProfilePic url={user.profile_image_url_https} />
       <div>
-        <div class="name">
+        <div className="name">
           <div>{user.name}</div>
           {user.verified && <img src="/img/verified_logo.svg" />}
         </div>
-        <div class="screen_name">@{user.screen_name}</div>
+        <div className="screen_name">@{user.screen_name}</div>
       </div>
     </div>
   );

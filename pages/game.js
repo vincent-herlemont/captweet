@@ -16,6 +16,13 @@ const Game = ({ className }) => {
     console.log("dataCtx.game.data.quiz.value", dataCtx.game.data.quiz.value);
   }, [dataCtx.game.data.quiz.value]);
 
+  useEffect(() => {
+    console.log(
+      "dataCtx.game.data.quiz.current",
+      dataCtx.game.data.quiz.current
+    );
+  }, [dataCtx.game.data.quiz.current]);
+
   return (
     <div className={className}>
       <Head>
@@ -30,12 +37,23 @@ const Game = ({ className }) => {
         {targetUser && targetUser.id && (
           <React.Fragment>
             <GameHeader user={targetUser} />
-            {dataCtx.game.data.quiz.value.map((value) => {
-              return <TweetList tweets={value.tweets} />;
-            })}
+            {dataCtx.game.data.quiz.value[dataCtx.game.data.quiz.current] && (
+              <TweetList
+                tweets={
+                  dataCtx.game.data.quiz.value[dataCtx.game.data.quiz.current]
+                    .tweets
+                }
+              />
+            )}
           </React.Fragment>
         )}
-        ... | {targetUser && targetUser.id} |
+        <button
+          onClick={() => {
+            dataCtx.game.dispatch({ type: "move_quiz", n: -1 });
+          }}
+        >
+          Back
+        </button>
       </main>
       <footer>footer</footer>
       <FullHeight />

@@ -28,7 +28,7 @@ export default styled(GameHeader)`
     url(${({ user }) => user.profile_banner_url});
   background-position: center center;
   background-size: cover;
-  border-radius: 0px 0px 15px 15px;
+  border-radius: 0px 0px 0.9em 0.9em;
 
   .question {
     align-self: flex-end;
