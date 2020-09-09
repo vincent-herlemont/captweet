@@ -44,7 +44,9 @@ const Tweet = ({ className, tweet, onClick }) => {
   );
 };
 
-export default styled(Tweet)`
+export default styled(Tweet).attrs((props) => ({
+  checked: props.checked ? props.checked : false,
+}))`
   display: flex;
   flex-flow: column;
 
@@ -53,6 +55,13 @@ export default styled(Tweet)`
   padding: 0.5em;
   border: 1px solid #c9c9c9;
   box-sizing: border-box;
+
+  background-color: ${({ checked, theme }) =>
+    checked
+      ? checked === "valid"
+        ? theme.color.green
+        : theme.color.red
+      : theme.color.white};
 
   ${ProfilePreview} {
     font-size: 0.8em;

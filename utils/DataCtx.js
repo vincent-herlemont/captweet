@@ -122,13 +122,24 @@ export const DataCtxProvider = ({ children }) => {
           },
         };
       }
-      case "start_quiz": {
+      case "loading_quiz": {
         return !state.quiz.loading
           ? {
               ...state,
               quiz: {
                 ...state.quiz,
                 loading: true,
+              },
+            }
+          : state;
+      }
+      case "start_quiz": {
+        return state.quiz.loading
+          ? {
+              ...state,
+              quiz: {
+                ...state.quiz,
+                loading: false,
               },
             }
           : state;
@@ -141,6 +152,7 @@ export const DataCtxProvider = ({ children }) => {
             value: [
               ...state.quiz.value,
               {
+                selected_tweet: {},
                 tweets: action.tweets,
               },
             ],
@@ -157,6 +169,27 @@ export const DataCtxProvider = ({ children }) => {
           quiz: {
             ...state.quiz,
             current: next_current,
+          },
+        };
+      }
+      case "select_tweet": {
+        return {
+          ...state,
+          quiz: {
+            ...state.quiz,
+            value: state.quiz.value.map((v, k) => {
+              if (state.quiz.current === k) {
+                return {
+                  ...v,
+                  selected_tweet: {
+                    id: action.tweet.id,
+                    valid: state.targetUser.value.id === action.tweet.user.id,
+                  },
+                };
+              } else {
+                return v;
+              }
+            }),
           },
         };
       }
@@ -256,14 +289,16 @@ export const DataCtxProvider = ({ children }) => {
         return;
       }
 
+      if (isStart && !gameLoading) {
+        await router.push("/game");
+      }
+
       if (!ctx.users.data || !ctx.users.data.length) {
         return;
       }
 
       console.log("users", ctx.users);
-      dispatchGameData({ type: "start_quiz" });
-      // await getTweets(ctx.game.data.targetUser.id);
-      // console.log("getTweets", ctx.game);
+      dispatchGameData({ type: "loading_quiz" });
     };
 
     workflow();
@@ -286,6 +321,7 @@ export const DataCtxProvider = ({ children }) => {
         await createQuiz();
         await createQuiz();
 
+        dispatchGameData({ type: "start_quiz" });
         return;
       }
     };
