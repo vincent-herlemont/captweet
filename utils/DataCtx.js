@@ -153,7 +153,13 @@ export const DataCtxProvider = ({ children }) => {
       case "move_quiz": {
         let next_current = state.quiz.current + action.n;
         if (next_current < 0 || next_current > state.quiz.value.length - 1) {
-          return state;
+          return {
+            ...state,
+            quiz: {
+              ...state.quiz,
+              isEnded: state.quiz.current === state.quiz.value.length - 1,
+            },
+          };
         }
         return {
           ...state,
@@ -182,7 +188,6 @@ export const DataCtxProvider = ({ children }) => {
           ...state,
           quiz: {
             ...state.quiz,
-            isEnded: state.quiz.current === state.quiz.value.length - 1,
             score: isValid ? state.quiz.score + 1 : state.quiz.score,
             value: quizValue,
           },

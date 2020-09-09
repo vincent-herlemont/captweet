@@ -35,6 +35,13 @@ const Game = ({ className }) => {
         {targetUser && targetUser.id && (
           <React.Fragment>
             <GameHeader user={targetUser} />
+            {dataCtx.game.data.quiz.value[dataCtx.game.data.quiz.current] && (
+              <TweetList
+                data={
+                  dataCtx.game.data.quiz.value[dataCtx.game.data.quiz.current]
+                }
+              />
+            )}
             <button
               onClick={() => {
                 dataCtx.game.dispatch({ type: "move_quiz", n: -1 });
@@ -49,13 +56,6 @@ const Game = ({ className }) => {
             >
               next
             </button>
-            {dataCtx.game.data.quiz.value[dataCtx.game.data.quiz.current] && (
-              <TweetList
-                data={
-                  dataCtx.game.data.quiz.value[dataCtx.game.data.quiz.current]
-                }
-              />
-            )}
           </React.Fragment>
         )}
       </main>

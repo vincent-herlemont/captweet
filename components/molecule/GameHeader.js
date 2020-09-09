@@ -7,7 +7,7 @@ const GameHeader = ({ className, user }) => {
     <div className={className}>
       <div className="question">Find {user.name}'s tweet !</div>
       <div className="profile_pic">
-        <ProfilePic url={user.profile_image_url_https} size={7} />
+        <ProfilePic url={user.profile_image_url_https} size={5} />
       </div>
     </div>
   );

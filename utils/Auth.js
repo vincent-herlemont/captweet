@@ -1,16 +1,20 @@
 import { Url } from "./Api";
-
-const STORAGE_KEY = "user_data";
-import { Plugins } from "@capacitor/core";
 import React, { useState, useEffect } from "react";
-const { Storage } = Plugins;
+import { useRouter } from "next/router";
+import { Plugins } from "@capacitor/core";
+const { App: CapApp } = Plugins;
 
+const { Storage } = Plugins;
 const defaultValues = { status: false, loading: true };
 const AuthCtx = React.createContext(defaultValues);
+
 export default AuthCtx;
+
+const STORAGE_KEY = "user_data";
 
 export const AuthCtxProvider = ({ children }) => {
   const [oauthTokens, setOauthTokens] = useState(defaultValues);
+  const router = useRouter();
 
   async function removeUrlData() {
     window.history.pushState(
@@ -23,11 +27,15 @@ export const AuthCtxProvider = ({ children }) => {
     );
   }
 
-  async function trySaveSession() {
-    if (window.location.search.match(/auth_token.+oauth_verifier/) == null) {
+  async function trySaveSession(locationSearch) {
+    locationSearch = locationSearch
+      ? locationSearch
+      : window.location.search.match(/auth_token.+oauth_verifier/);
+    if (locationSearch == null) {
+      console.error(";''''(");
       return;
     }
-    await fetch(Url("api/twitter-user-tokens" + window.location.search), {
+    await fetch(Url("api/twitter-user-tokens" + locationSearch), {
       method: "GET",
       mode: "cors",
     })
@@ -89,6 +97,24 @@ export const AuthCtxProvider = ({ children }) => {
     };
 
     actions();
+  }, []);
+
+  useEffect(() => {
+    CapApp.addListener("appUrlOpen", (data) => {
+      // Example url: https://beerswift.app/tabs/tab2
+      // slug = /tabs/tab2
+      console.log("appUrlOpen", data);
+      const slug = data.url.split(".app").pop();
+      if (slug && slug !== "/") {
+        console.log("try save session !");
+        const locationSearch = data.url.split(".app/search")[1];
+        if (locationSearch) {
+          trySaveSession(locationSearch);
+        }
+      }
+      // If no match, do nothing - let regular routing
+      // logic take over
+    });
   }, []);
 
   return <AuthCtx.Provider value={auth}>{children}</AuthCtx.Provider>;
