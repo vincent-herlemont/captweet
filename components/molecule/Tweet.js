@@ -8,17 +8,37 @@ const Tweet = ({ className, tweet, onClick, hide }) => {
   const [text, setText] = useState(tweet.text);
 
   useEffect(() => {
-    const findImages = tweet.text.match(/(https?:\/\/t\.co[^\s]+)/);
-    if (findImages && findImages.length && tweet.entities.media) {
-      let imageUrl = findImages[0];
+    const turls = tweet.text.match(/(https?:\/\/t\.co[^\s]+)/);
+    if (turls && turls.length) {
+      if (tweet.entities.media) {
+        let imageUrl = turls[0];
 
-      let entity = tweet.entities.media.find((e) => {
-        return e.url === imageUrl ? e : null;
-      });
+        let entity = tweet.entities.media.find((e) => {
+          return e.url === imageUrl ? e : null;
+        });
 
-      if (entity && entity.media_url_https) {
-        setImage(entity.media_url_https);
-        setText(tweet.text.replace(imageUrl, ""));
+        if (entity && entity.media_url_https) {
+          setImage(entity.media_url_https);
+          setText(tweet.text.replace(imageUrl, ""));
+          return;
+        }
+      } else if (tweet.entities.urls) {
+        let url = turls[0];
+
+        let entity = tweet.entities.urls.find((e) => {
+          return e.url === url ? e : null;
+        });
+
+        if (entity.expanded_url) {
+          console.log(entity.expanded_url);
+        }
+        // <blockquote class="twitter-tweet">
+        //  <p lang="en" dir="ltr">
+        //   Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>.
+        //   <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a>
+        //   <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a>
+        //  </p>&mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a>
+        // </blockquote>
       }
     }
   }, []);

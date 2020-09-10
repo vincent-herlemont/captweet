@@ -22,6 +22,11 @@ const Game = ({ className }) => {
         <title>Captweet</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charSet="utf-8"
+        ></script>
       </Head>
       <header>
         <HeaderBar
