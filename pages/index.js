@@ -57,7 +57,7 @@ const Home = ({ className }) => {
       </header>
       <main>
         <div>
-          {twitterAuthorizeUrl && (
+          {twitterAuthorizeUrl && Capacitor.isNative ? (
             <button
               onClick={async () => {
                 await Browser.open({ url: twitterAuthorizeUrl });
@@ -65,6 +65,8 @@ const Home = ({ className }) => {
             >
               Loggin with twitter
             </button>
+          ) : (
+            <a href={twitterAuthorizeUrl}>Loggin with twitter</a>
           )}
         </div>
       </main>

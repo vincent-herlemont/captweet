@@ -2,6 +2,7 @@ import { Url } from "./Api";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Plugins } from "@capacitor/core";
+import { Capacitor } from "@capacitor/core";
 const { App: CapApp } = Plugins;
 
 const { Storage } = Plugins;
@@ -30,7 +31,9 @@ export const AuthCtxProvider = ({ children }) => {
   async function trySaveSession(locationSearch) {
     locationSearch = locationSearch
       ? locationSearch
-      : window.location.search.match(/auth_token.+oauth_verifier/);
+      : window.location.search.match(/auth_token.+oauth_verifier/)
+      ? window.location.search
+      : null;
     if (locationSearch == null) {
       console.error(";''''(");
       return;
@@ -90,26 +93,26 @@ export const AuthCtxProvider = ({ children }) => {
     removeSession,
   };
 
-  useEffect(() => {
-    const actions = async () => {
-      await trySaveSession();
-      await fetchDataFromLocalStorage();
-    };
+  const authenticateWorkflow = async (locationSearch) => {
+    await trySaveSession(locationSearch);
+    await fetchDataFromLocalStorage();
+  };
 
-    actions();
+  useEffect(() => {
+    authenticateWorkflow();
   }, []);
 
   useEffect(() => {
     CapApp.addListener("appUrlOpen", (data) => {
       // Example url: https://beerswift.app/tabs/tab2
       // slug = /tabs/tab2
-      console.log("appUrlOpen", data);
       const slug = data.url.split(".app").pop();
+      console.log("appUrlOpen", data);
       if (slug && slug !== "/") {
-        console.log("try save session !");
         const locationSearch = data.url.split(".app/search")[1];
         if (locationSearch) {
-          trySaveSession(locationSearch);
+          authenticateWorkflow(locationSearch);
+          router.replace("/search");
         }
       }
       // If no match, do nothing - let regular routing

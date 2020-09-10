@@ -30,8 +30,8 @@ const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 200;
-    src: url(/fonts/roboto/Roboto-Light.ttf) format('woff2');
+    font-weight: 100;
+    src: url(/fonts/roboto/Roboto-Thin.ttf) format('woff2');
   }
 `;
 

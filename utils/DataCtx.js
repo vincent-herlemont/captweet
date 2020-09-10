@@ -104,7 +104,6 @@ export const DataCtxProvider = ({ children }) => {
             };
       }
       case "raz": {
-        // removeTargetUser();
         return {
           ...INITIAL_STATES,
           targetUser: {

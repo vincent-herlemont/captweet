@@ -7,7 +7,7 @@ const GameHeader = ({ className, user }) => {
     <div className={className}>
       <div className="question">Find {user.name}'s tweet !</div>
       <div className="profile_pic">
-        <ProfilePic url={user.profile_image_url_https} size={5} />
+        <ProfilePic url={user.profile_image_url_https} size={4.5} />
       </div>
     </div>
   );
@@ -35,8 +35,8 @@ export default styled(GameHeader)`
     padding: 1em 0 1em 1em;
     font-family: Roboto;
     font-style: normal;
-    font-weight: 200;
-    font-size: 2em;
+    font-weight: 100;
+    font-size: 2.1em;
     flex: 1;
     overflow-wrap: anywhere;
   }
