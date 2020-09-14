@@ -49,11 +49,12 @@ export const DataCtxProvider = ({ children }) => {
     let remoteResp = await requestData(
       `api/twitter-user-timeline?id=${userId}&name=${screenName}`
     );
-    if (remoteResp && remoteResp.data && remoteResp.data.length > 0) {
-      ctx.game.users_tweets[userId] = remoteResp.data;
+    if (remoteResp?.length) {
+      ctx.game.users_tweets[userId] = remoteResp;
       // saveToStorage(storage_key, remoteResp.data);
       return true;
     } else {
+      ctx.game.users_tweets[userId] = [];
       return false;
     }
   }

@@ -15,8 +15,6 @@ let oauth_callback = process.env.OAUTH_CALLBACK;
 let faunadb_secret = process.env.FAUNADB_SECRET;
 
 module.exports = async (req, res) => {
-  console.info(req.body.isNative);
-
   const oauth = OAuth({
     consumer: { key: oauth_consumer_key, secret: oauth_consumer_secret },
     signature_method: "HMAC-SHA1",

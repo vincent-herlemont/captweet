@@ -5,42 +5,13 @@ import twitterText from "twitter-text";
 
 const Tweet = ({ className, tweet, onClick, hide }) => {
   const [image, setImage] = useState(null);
-  const [text, setText] = useState(tweet.text);
+  const [text, setText] = useState(
+    tweet?.v2?.text ? tweet?.v2?.text : tweet.text
+  );
 
   useEffect(() => {
     const turls = tweet.text.match(/(https?:\/\/t\.co[^\s]+)/);
-    if (turls && turls.length) {
-      if (tweet.entities.media) {
-        let imageUrl = turls[0];
-
-        let entity = tweet.entities.media.find((e) => {
-          return e.url === imageUrl ? e : null;
-        });
-
-        if (entity && entity.media_url_https) {
-          setImage(entity.media_url_https);
-          setText(tweet.text.replace(imageUrl, ""));
-          return;
-        }
-      } else if (tweet.entities.urls) {
-        let url = turls[0];
-
-        let entity = tweet.entities.urls.find((e) => {
-          return e.url === url ? e : null;
-        });
-
-        if (entity.expanded_url) {
-          console.log(entity.expanded_url);
-        }
-        // <blockquote class="twitter-tweet">
-        //  <p lang="en" dir="ltr">
-        //   Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>.
-        //   <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a>
-        //   <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a>
-        //  </p>&mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a>
-        // </blockquote>
-      }
-    }
+    // TODO ...
   }, []);
 
   return (
@@ -53,12 +24,15 @@ const Tweet = ({ className, tweet, onClick, hide }) => {
       <ProfilePreview hide={hide} user={tweet.user} />
       <div className="body">
         <div className="text">{text}</div>
-        {image && (
-          <div
-            className="image"
-            style={{ backgroundImage: `url("${image}")` }}
-          ></div>
-        )}
+        {tweet?.v2?.attachments?.media?.length > 0 &&
+          tweet.v2.attachments.media[0].url && (
+            <div
+              className="image"
+              style={{
+                backgroundImage: `url("${tweet.v2.attachments.media[0].url}")`,
+              }}
+            ></div>
+          )}
       </div>
     </div>
   );
