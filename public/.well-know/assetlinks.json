@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.leszeros.captweet",
+      "sha256_cert_fingerprints": [
+        "44:1E:D0:32:F0:A8:40:9C:A6:56:F2:A7:70:AE:9D:62:54:36:6E:64:DC:D1:CE:72:4F:1A:52:20:BC:58:C4:63"
+      ]
+    }
+  }
+]

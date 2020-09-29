@@ -1,0 +1,45 @@
+{
+  "name": "captweet",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build_android": "next build && next export",
+    "start": "next start",
+    "resources": "capacitor-resources -S -p android",
+    "format-check": "prettier --check .",
+    "format-write": "prettier --write .",
+    "test": "jest",
+    "test-w": "jest --watch"
+  },
+  "dependencies": {
+    "@capacitor/android": "^2.4.0",
+    "@capacitor/cli": "^2.4.0",
+    "@capacitor/core": "^2.4.0",
+    "axios": "^0.20.0",
+    "capacitor-resources": "^2.0.3",
+    "faunadb": "^3.0.1",
+    "lodash": "^4.17.20",
+    "next": "9.5.2",
+    "next-pwa": "^3.1.3",
+    "oauth-1.0a": "^2.2.6",
+    "qs": "^6.9.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-string-replace": "^0.4.4",
+    "strict-uri-encode": "^2.0.0",
+    "styled-components": "^5.1.1",
+    "twitter-text": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-jest": "^26.3.0",
+    "babel-plugin-styled-components": "^1.11.1",
+    "jest": "^26.4.2",
+    "prettier": "2.1.1",
+    "react-test-renderer": "^16.13.1"
+  }
+}

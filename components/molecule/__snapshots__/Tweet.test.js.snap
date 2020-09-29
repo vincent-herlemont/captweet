@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reference Tweet 1`] = `
+<div
+  className="Tweet-sc-1lxq3tm-0 eXnoUJ tweet"
+  onClick={[Function]}
+>
+  <div
+    className="ProfilePreview-rqbkdj-0 kAvvlW"
+  >
+    <div
+      style={
+        Object {
+          "backgroundColor": "#d7d7d7",
+          "backgroundSize": "3em 3em",
+          "border": "0.1em solid #FFFFFF",
+          "borderRadius": "1.5em",
+          "height": "3em",
+          "margin": "0.3em",
+          "width": "3em",
+        }
+      }
+    />
+    <div>
+      <div
+        className="name"
+      >
+        <div>
+          ira.
+        </div>
+      </div>
+      <div
+        className="screen_name"
+      >
+        @
+      </div>
+    </div>
+  </div>
+  <div
+    className="body"
+  >
+    <div
+      className="text"
+    >
+      Short/long https://t.co/u52aQGmVng https://t.co/FsCWqU0zNy
+    </div>
+    <div
+      className="image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://pbs.twimg.com/media/Ehx_eJqXcAIFxAj.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="Tweet-sc-1lxq3tm-0 eXnoUJ tweet"
+      onClick={[Function]}
+    >
+      <div
+        className="ProfilePreview-rqbkdj-0 kAvvlW"
+      >
+        <div
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://pbs.twimg.com/profile_images/1290148984044941313/iskYvF-D_reasonably_small.jpg\\")",
+              "backgroundPosition": "center",
+              "backgroundSize": "3em 3em",
+              "border": "0.1em solid #FFFFFF",
+              "borderRadius": "1.5em",
+              "height": "3em",
+              "margin": "0.3em",
+              "width": "3em",
+            }
+          }
+        />
+        <div>
+          <div
+            className="name"
+          >
+            <div>
+              Kat Marchán 😷
+            </div>
+          </div>
+          <div
+            className="screen_name"
+          >
+            @
+            zkat__
+          </div>
+        </div>
+      </div>
+      <div
+        className="body"
+      >
+        <div
+          className="text"
+        >
+          Short/long
+
+I'm growing it out now because I miss having that lovely flowing hair ☺️ https://t.co/bsxIWkEJTM https://t.co/TkGzC24xCG
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Simple empty 1`] = `
+<div
+  className="Tweet-sc-1lxq3tm-0 eXnoUJ tweet"
+  onClick={[Function]}
+>
+  <div
+    className="ProfilePreview-rqbkdj-0 kAvvlW"
+  >
+    <div
+      style={
+        Object {
+          "backgroundColor": "#d7d7d7",
+          "backgroundSize": "3em 3em",
+          "border": "0.1em solid #FFFFFF",
+          "borderRadius": "1.5em",
+          "height": "3em",
+          "margin": "0.3em",
+          "width": "3em",
+        }
+      }
+    />
+    <div>
+      <div
+        className="name"
+      >
+        <div />
+      </div>
+      <div
+        className="screen_name"
+      >
+        @
+      </div>
+    </div>
+  </div>
+  <div
+    className="body"
+  >
+    <div
+      className="text"
+    />
+    
+  </div>
+</div>
+`;
+
+exports[`Simple text 1`] = `
+<div
+  className="Tweet-sc-1lxq3tm-0 eXnoUJ tweet"
+  onClick={[Function]}
+>
+  <div
+    className="ProfilePreview-rqbkdj-0 kAvvlW"
+  >
+    <div
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://pbs.twimg.com/profile_images/1047086509013241858/gFyIPSS4_reasonably_small.jpg\\")",
+          "backgroundPosition": "center",
+          "backgroundSize": "3em 3em",
+          "border": "0.1em solid #FFFFFF",
+          "borderRadius": "1.5em",
+          "height": "3em",
+          "margin": "0.3em",
+          "width": "3em",
+        }
+      }
+    />
+    <div>
+      <div
+        className="name"
+      >
+        <div>
+          Fanny Cohen Moreau
+        </div>
+      </div>
+      <div
+        className="screen_name"
+      >
+        @
+        FannyCOMO
+      </div>
+    </div>
+  </div>
+  <div
+    className="body"
+  >
+    <div
+      className="text"
+    >
+      C'est si beau &lt;3 https://t.co/IX23UoNkJc
+    </div>
+    
+  </div>
+</div>
+`;

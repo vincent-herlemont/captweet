@@ -1,0 +1,325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extractReferencesIdOfTweetsV2 1`] = `
+Array [
+  "1305528614717460480",
+  "1304452176346050566",
+  "1304389501515685890",
+]
+`;
+
+exports[`hydrateTweetV2ReferencedTweets 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "author_id": "49398462",
+      "id": "1305806023840665600",
+      "lang": "fr",
+      "referenced_tweets": Array [
+        Object {
+          "data": Object {
+            "attachments": Object {
+              "media": Array [
+                Object {
+                  "height": 720,
+                  "media_key": "13_1305519305631637505",
+                  "preview_image_url": "https://pbs.twimg.com/media/Eh4jWYOXgAEDqA3.jpg",
+                  "type": "video",
+                },
+              ],
+              "media_keys": Array [
+                "13_1305519305631637505",
+              ],
+            },
+            "author": Object {
+              "id": "326698989",
+              "name": "CANAL+",
+              "profile_image_url": "https://pbs.twimg.com/profile_images/978187415536963584/yS-EtXse_normal.jpg",
+              "username": "canalplus",
+            },
+            "author_id": "326698989",
+            "id": "1305776243321827328",
+            "lang": "fr",
+            "text": "test_0",
+          },
+          "id": "1305776243321827328",
+          "type": "quoted",
+        },
+      ],
+      "text": "test_0",
+    },
+    Object {
+      "author_id": "49398462",
+      "id": "1305544744139882496",
+      "lang": "fr",
+      "referenced_tweets": Array [
+        Object {
+          "data": Object {
+            "attachments": Object {
+              "media": Array [
+                Object {
+                  "height": 360,
+                  "media_key": "3_1305528610464370689",
+                  "type": "photo",
+                  "url": "https://pbs.twimg.com/media/Eh4rWq7WkAEJwh8.jpg",
+                },
+              ],
+              "media_keys": Array [
+                "3_1305528610464370689",
+              ],
+            },
+            "author": Object {
+              "id": "108557659",
+              "name": "Bibliothèques Sans Frontières",
+              "profile_image_url": "https://pbs.twimg.com/profile_images/1093891299374190592/saEDuWvQ_normal.jpg",
+              "username": "BSF_Inter",
+            },
+            "author_id": "108557659",
+            "id": "1305528614717460480",
+            "lang": "fr",
+            "text": "test_1",
+          },
+          "id": "1305528614717460480",
+          "type": "quoted",
+        },
+      ],
+      "text": "test_1",
+    },
+    Object {
+      "author_id": "49398462",
+      "id": "1304460020051054592",
+      "lang": "fr",
+      "referenced_tweets": Array [
+        Object {
+          "data": Object {
+            "author": Object {
+              "id": "108557659",
+              "name": "Bibliothèques Sans Frontières",
+              "profile_image_url": "https://pbs.twimg.com/profile_images/1093891299374190592/saEDuWvQ_normal.jpg",
+              "username": "BSF_Inter",
+            },
+            "author_id": "108557659",
+            "id": "1304452176346050566",
+            "lang": "fr",
+            "text": "test_2",
+          },
+          "id": "1304452176346050566",
+          "type": "quoted",
+        },
+      ],
+      "text": "test_2",
+    },
+    Object {
+      "author_id": "49398462",
+      "id": "1304389736715427841",
+      "lang": "und",
+      "referenced_tweets": Array [
+        Object {
+          "data": Object {
+            "attachments": Object {
+              "media": Array [
+                Object {
+                  "height": 566,
+                  "media_key": "3_1304389498126635008",
+                  "type": "photo",
+                  "url": "https://pbs.twimg.com/media/EhofVmyWkAAwJWz.jpg",
+                },
+              ],
+              "media_keys": Array [
+                "3_1304389498126635008",
+              ],
+            },
+            "author": Object {
+              "id": "34867057",
+              "name": "France Inter",
+              "profile_image_url": "https://pbs.twimg.com/profile_images/755746740779749376/f-lxJosk_normal.jpg",
+              "username": "franceinter",
+            },
+            "author_id": "34867057",
+            "id": "1304389501515685890",
+            "lang": "fr",
+            "text": "test_3",
+          },
+          "id": "1304389501515685890",
+          "type": "quoted",
+        },
+      ],
+      "text": "test_3",
+    },
+  ],
+  "includes": Object {
+    "users": Array [
+      Object {
+        "id": "49398462",
+        "name": "Augustin Trapenard",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/3511398739/5eb98449c106f3933a813f31c638b4f5_normal.jpeg",
+        "username": "ATrapenard",
+      },
+    ],
+  },
+}
+`;
+
+exports[`hydrateTweetV2Users 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "attachments": Object {
+        "media_keys": Array [
+          "13_1305519305631637505",
+        ],
+      },
+      "author": Object {
+        "id": "326698989",
+        "name": "CANAL+",
+        "profile_image_url": "https:://...",
+        "username": "canalplus",
+      },
+      "author_id": "326698989",
+      "id": "1305776243321827328",
+      "lang": "fr",
+      "text": "test_0",
+    },
+    Object {
+      "attachments": Object {
+        "media_keys": Array [
+          "3_1305528610464370689",
+        ],
+      },
+      "author": Object {
+        "id": "108557659",
+        "name": "Bibliothèques Sans Frontières",
+        "profile_image_url": "https:://...",
+        "username": "BSF_Inter",
+      },
+      "author_id": "108557659",
+      "id": "1305528614717460480",
+      "lang": "fr",
+      "text": "test_1",
+    },
+    Object {
+      "author": Object {
+        "id": "108557659",
+        "name": "Bibliothèques Sans Frontières",
+        "profile_image_url": "https:://...",
+        "username": "BSF_Inter",
+      },
+      "author_id": "108557659",
+      "id": "1304452176346050566",
+      "lang": "fr",
+      "text": "test_2",
+    },
+    Object {
+      "attachments": Object {
+        "media_keys": Array [
+          "3_1304389498126635008",
+        ],
+      },
+      "author": Object {
+        "id": "34867057",
+        "name": "France Inter",
+        "profile_image_url": "https:://...",
+        "username": "franceinter",
+      },
+      "author_id": "34867057",
+      "id": "1304389501515685890",
+      "lang": "fr",
+      "text": "test_3",
+    },
+  ],
+  "includes": Object {
+    "users": Array [
+      Object {
+        "id": "326698989",
+        "name": "CANAL+",
+        "profile_image_url": "https:://...",
+        "username": "canalplus",
+      },
+      Object {
+        "id": "108557659",
+        "name": "Bibliothèques Sans Frontières",
+        "profile_image_url": "https:://...",
+        "username": "BSF_Inter",
+      },
+      Object {
+        "id": "34867057",
+        "name": "France Inter",
+        "profile_image_url": "https:://...",
+        "username": "franceinter",
+      },
+    ],
+  },
+}
+`;
+
+exports[`tweetV2HydrateAttachments-media 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "attachments": Object {
+        "media": Array [
+          Object {
+            "height": 1080,
+            "media_key": "13_1302293057916882945",
+            "preview_image_url": "https://pbs.twimg.com/media/XXXXXX.jpg",
+            "type": "video",
+          },
+        ],
+        "media_keys": Array [
+          "13_1302293057916882945",
+        ],
+      },
+      "id": "1303236088216137728",
+      "lang": "fr",
+      "text": "data_1",
+    },
+    Object {
+      "attachments": Object {
+        "media": Array [
+          Object {
+            "height": 1080,
+            "media_key": "3_1301470606249136129",
+            "preview_image_url": "https://pbs.twimg.com/media/XXXXXX.jpg",
+            "type": "video",
+          },
+          Object {
+            "height": 2048,
+            "media_key": "3_1301470606249136130",
+            "type": "photo",
+            "url": "https://pbs.twimg.com/media/XXXXXX.jpg",
+          },
+        ],
+        "media_keys": Array [
+          "3_1301470606249136129",
+          "3_1301470606249136130",
+        ],
+      },
+      "id": "1301470615786921986",
+      "lang": "fr",
+      "text": "data_2",
+    },
+  ],
+  "includes": Object {
+    "media": Array [
+      Object {
+        "height": 1080,
+        "media_key": "13_1302293057916882945",
+        "preview_image_url": "https://pbs.twimg.com/media/XXXXXX.jpg",
+        "type": "video",
+      },
+      Object {
+        "height": 1080,
+        "media_key": "3_1301470606249136129",
+        "preview_image_url": "https://pbs.twimg.com/media/XXXXXX.jpg",
+        "type": "video",
+      },
+      Object {
+        "height": 2048,
+        "media_key": "3_1301470606249136130",
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/XXXXXX.jpg",
+      },
+    ],
+  },
+}
+`;
