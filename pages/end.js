@@ -8,8 +8,9 @@ import DataCtx from "../utils/DataCtx";
 import CloudBackground from "../components/atom/CloudBackground";
 import ProfilePic from "../components/atom/ProfilePic";
 import Button from "../components/atom/Button";
+import openLink from "../utils/openLink";
 
-const { Share } = Plugins;
+const { Share, Browser } = Plugins;
 
 const Home = ({ className }) => {
   let dataCtx = useContext(DataCtx);
@@ -20,7 +21,7 @@ const Home = ({ className }) => {
   const [style, setStyle] = useState({ marginBottom: "" });
   useEffect(() => {
     let h = window.innerHeight;
-    setStyle({ marginBottom: `${h / 7}px` });
+    setStyle({ marginBottom: `${h / 12}px` });
   }, []);
 
   return (
@@ -60,6 +61,16 @@ const Home = ({ className }) => {
               dataCtx.game.dispatch({ type: "raz" });
             }}
             text={"Back"}
+          />
+          <img
+            className={"github"}
+            onClick={() =>
+              openLink(
+                "https://github.com/vincent-herlemont/captweet",
+                "_blank"
+              )
+            }
+            src="https://img.shields.io/github/stars/vincent-herlemont/captweet?style=social"
           />
         </div>
         <div
@@ -148,6 +159,10 @@ export default styled(Home)`
         letter-spacing: 0.2em;
         color: ${(props) => props.theme.color.dark_blue};
         font-size: 1.5em;
+      }
+
+      .github {
+        padding: 2em;
       }
     }
 

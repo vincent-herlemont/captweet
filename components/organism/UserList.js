@@ -19,6 +19,7 @@ const UserList = ({ className }) => {
           onClick={async () => {
             await dataCtx.game.setTargetUser(user);
             await router.push("/game");
+            window.scrollTo(0, 0);
           }}
         />
       );

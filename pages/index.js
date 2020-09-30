@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import AuthCtx from "../utils/Auth";
 import { Capacitor, Plugins } from "@capacitor/core";
 import FlatButton from "../components/atom/FlatButton";
+import openLink from "../utils/openLink";
 
 const { Browser } = Plugins;
 
@@ -59,13 +60,7 @@ const Home = ({ className }) => {
         <div className={"logo"} />
         <div>
           <FlatButton
-            onClick={() => {
-              if (Capacitor.isNative) {
-                Browser.open({ url: twitterAuthorizeUrl });
-              } else {
-                window.open(twitterAuthorizeUrl, "_self");
-              }
-            }}
+            onClick={() => openLink(twitterAuthorizeUrl)}
             text={"Login with twitter"}
             loading={!twitterAuthorizeUrl}
           />

@@ -69,7 +69,10 @@ const Game = ({ className }) => {
           <FooterBar>
             <Button
               text={"👉 continue"}
-              onClick={() => dataCtx.game.dispatch({ type: "move_quiz", n: 1 })}
+              onClick={() => {
+                dataCtx.game.dispatch({ type: "move_quiz", n: 1 });
+                window.scrollTo(0, 0);
+              }}
             />
           </FooterBar>
         )}
