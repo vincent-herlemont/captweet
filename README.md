@@ -3,16 +3,15 @@
 </p>
 
 <p align="center">
-    <img src="/resources/pwa.png" width="130px" />
-    <img src="/resources/google-play.jpg" width="130px" />
+    <a href="https://captweet.vercel.app/search" align="left" target="_blank"><img src="/resources/download-pwa.png" height="50px" /></a>
+    <a href="https://play.google.com/store/apps/details?id=com.leszeros.captweet" target="_blank"><img src="/resources/download-google-play.png" height="50px" /></a>
 </p>
 
 Generate Quizz with your twitter timeline : find who has wrote the tweet !
 
 # Goals
 
-Explore the development possibilities with [NextJS](https://nextjs.org/) / [Vercel](https://vercel.com/) and [Capacitor](https://capacitorjs.com/) to create 
-a quickly an app.
+Explore the development possibilities with [NextJS](https://nextjs.org/) / [Vercel](https://vercel.com/) and [Capacitor](https://capacitorjs.com/) to create quickly an app.
 
 ### Screenshot
 <img src="/resources/Screenshot_2020-09-29-11-59-14-654_com.leszeros.captweet.jpg" align="left" alt="alt text" width="130px"/>
