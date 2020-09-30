@@ -3,8 +3,15 @@ import styled from "styled-components";
 import FullHeight from "../styles/fullheight";
 import HeaderBar from "../components/organism/HeaderBar";
 import UserList from "../components/organism/UserList";
+import { useContext, useEffect } from "react";
+import DataCtx from "../utils/DataCtx";
 
 const Search = ({ className }) => {
+  let dataCtx = useContext(DataCtx);
+  useEffect(() => {
+    dataCtx.game.dispatch({ type: "raz" });
+  }, []);
+
   return (
     <div className={className}>
       <Head>
