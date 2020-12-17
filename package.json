@@ -18,7 +18,7 @@
     "@capacitor/cli": "^2.4.0",
     "@capacitor/core": "^2.4.0",
     "axios": "^0.20.0",
-    "capacitor-resources": "^2.0.3",
+    "capacitor-resources": "^2.0.5",
     "faunadb": "^3.0.1",
     "lodash": "^4.17.20",
     "next": "9.5.2",
