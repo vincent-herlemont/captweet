@@ -16,7 +16,7 @@
   "dependencies": {
     "@capacitor/android": "^2.4.0",
     "@capacitor/cli": "^2.4.0",
-    "@capacitor/core": "^2.4.0",
+    "@capacitor/core": "^2.4.6",
     "axios": "^0.20.0",
     "capacitor-resources": "^2.0.3",
     "faunadb": "^3.0.1",
