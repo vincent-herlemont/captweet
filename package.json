@@ -29,7 +29,7 @@
     "react-dom": "16.13.1",
     "react-string-replace": "^0.4.4",
     "strict-uri-encode": "^2.0.0",
-    "styled-components": "^5.1.1",
+    "styled-components": "^5.2.2",
     "twitter-text": "^3.1.0"
   },
   "devDependencies": {
