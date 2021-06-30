@@ -37,7 +37,7 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "babel-jest": "^26.3.0",
-    "babel-plugin-styled-components": "^1.11.1",
+    "babel-plugin-styled-components": "^1.13.1",
     "jest": "^26.4.2",
     "prettier": "2.1.1",
     "react-test-renderer": "^16.13.1"
